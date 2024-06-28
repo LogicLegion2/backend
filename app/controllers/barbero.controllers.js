@@ -224,12 +224,12 @@ const buscar = async (req, res) => {
         });
 
         // Asignar los datos iniciales a los resultados
-        resultados.barberos = rowsBar[0];
-        resultados.servicios = rowsSer[0];
-        resultados.productos = rowsPro[0];
-        resultados.ofertas = rowsOfe[0];
-        resultados.ubicaciones = rowsUbi[0];
-        resultados.preguntas = rowsPre[0];
+        resultados.barberos = rowsBar;
+        resultados.servicios = rowsSer;
+        resultados.productos = rowsPro;
+        resultados.ofertas = rowsOfe;
+        resultados.ubicaciones = rowsUbi;
+        resultados.preguntas = rowsPre;
 
         // Realizar la búsqueda específica
         let query = '';
