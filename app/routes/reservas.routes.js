@@ -46,4 +46,5 @@ rutaReservaAdmin.get("/pdf/barbero/:id/:barbero", (req, res) => {
     );
 });
 
+
 export default rutaReservaAdmin;
