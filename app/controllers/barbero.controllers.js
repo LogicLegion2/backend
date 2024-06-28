@@ -168,12 +168,12 @@ const listarBarberoAdmin = async (req, res) => {
         ]);
 
         // Convertir imágenes a base64
-        resultados.barberos = rowsBar;
-        resultados.servicios = rowsSer;
-        resultados.productos = rowsPro;
-        resultados.ofertas = rowsOfe;
-        resultados.ubicaciones = rowsUbi;
-        resultados.preguntas = rowsPre;
+        resultados.barberos = rowsBar[0];
+        resultados.servicios = rowsSer[0];
+        resultados.productos = rowsPro[0];
+        resultados.ofertas = rowsOfe[0];
+        resultados.ubicaciones = rowsUbi[0];
+        resultados.preguntas = rowsPre[0];
 
         // Realizar la búsqueda específica
         let query = '';
