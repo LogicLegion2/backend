@@ -1,0 +1,23 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+var _express = require("express");
+var _ventasControllers = require("../controllers/ventas.controllers.js");
+var _oauth = require("../middlewares/oauth.js");
+/**
+ * Estas son las rutas del backend de ventas en mi proyecto
+ * @type {object}
+ */
+var rutaVentas = (0, _express.Router)();
+rutaVentas.post("/", _ventasControllers.crearPago);
+rutaVentas.post("/reembolso", _ventasControllers.crearReembolso);
+rutaVentas.get("/historial/:id", _ventasControllers.historialCompra);
+rutaVentas.get("/buscar", _ventasControllers.buscarProductoVendido);
+rutaVentas.get("/entregas/admin", _ventasControllers.verEntregasAdmin);
+rutaVentas.get("/entregas/:id", _ventasControllers.verEntregas);
+rutaVentas.get("/productos", _ventasControllers.verReservasProductos);
+rutaVentas.get("/carrito/:id", _ventasControllers.verCarroCompras);
+var _default = exports["default"] = rutaVentas;
