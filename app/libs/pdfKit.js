@@ -58,6 +58,7 @@ export async function generarPDF( dataLlamada, endLlamada) {
 
 export async function generarPDFBarbero(params, dataLlamada, endLlamada) {
     const id = params['id'];
+    const barbero = params['barbero'];
     console.log(`Id received: ${id}`);
     try {
         // Consulta a la base de datos
@@ -92,6 +93,7 @@ export async function generarPDFBarbero(params, dataLlamada, endLlamada) {
         }; 
 
         // Título del documento
+        doc.fontSize(13).text(`Barbero: ${barbero}`);
         doc.fontSize(30).text('Reservas Clientes', { align: 'center' });
         doc.moveDown();
         // Agrega tabla al documento

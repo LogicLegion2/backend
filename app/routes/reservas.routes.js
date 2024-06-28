@@ -30,7 +30,7 @@ rutaReservaAdmin.get("/pdf", (req, res) => {
 );
 });
 // Ruta para generar PDF de reservas de un barbero específico
-rutaReservaAdmin.get("/pdf/barbero/:id", (req, res) => {
+rutaReservaAdmin.get("/pdf/barbero/:id/:barbero", (req, res) => {
     const id = req.params['id'];
     
     // Configura las cabeceras de respuesta para el PDF generado
