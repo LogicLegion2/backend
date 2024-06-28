@@ -305,7 +305,7 @@ const buscar = async (req, res) => {
                     }
                 });
                 break;
-            case "ubicacions":
+            case "ubicacione":
                 searchResults.forEach(ubicacion => {
                     ubicacion.img64 = null;
                     if (ubicacion.foto) {
