@@ -59,7 +59,6 @@ export async function generarPDF( dataLlamada, endLlamada) {
 export async function generarPDFBarbero(params, dataLlamada, endLlamada) {
     const id = params['id'];
     const barbero = params['barbero'];
-    console.log(`Id received: ${id}`);
     try {
         // Consulta a la base de datos
         const [rows] = await pool.query(`CALL LL_VER_RESERVA_BARBERO(${id})`);

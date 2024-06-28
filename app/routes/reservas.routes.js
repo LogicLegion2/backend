@@ -32,6 +32,7 @@ rutaReservaAdmin.get("/pdf", (req, res) => {
 // Ruta para generar PDF de reservas de un barbero específico
 rutaReservaAdmin.get("/pdf/barbero/:id/:barbero", (req, res) => {
     const id = req.params['id'];
+    const barbero = req.params['barbero'];
     
     // Configura las cabeceras de respuesta para el PDF generado
     res.setHeader("Content-Type", "application/pdf");
@@ -39,7 +40,7 @@ rutaReservaAdmin.get("/pdf/barbero/:id/:barbero", (req, res) => {
 
     // Genera y envía el PDF utilizando la función generarPDFBarbero
     generarPDFBarbero(
-        { id },                      // Parámetros para la generación del PDF (en este caso, el ID del barbero)
+        { id,barbero },                      // Parámetros para la generación del PDF (en este caso, el ID del barbero)
         (chunk) => res.write(chunk, 'binary'), // Función de callback para escribir datos en el stream de respuesta
         () => res.end()              // Función de callback para finalizar el stream de respuesta
     );
