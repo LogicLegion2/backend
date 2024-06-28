@@ -137,7 +137,7 @@ const listarBarberoAdmin = async (req, res) => {
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
- const buscar = async (req, res) => {
+const buscar = async (req, res) => {
     try {
         const { desc, tipo } = req.query;
 
@@ -167,7 +167,63 @@ const listarBarberoAdmin = async (req, res) => {
             pool.query("CALL LL_VER_PREGUNTAS()")
         ]);
 
-        // Convertir imágenes a base64
+        // Convertir imágenes para los datos iniciales
+        rowsBar[0].forEach(barbero => {
+            barbero.img64 = null;
+            if (barbero.foto) {
+                try {
+                    barbero.img64 = Buffer.from(barbero.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+                }
+            }
+        });
+
+        rowsSer[0].forEach(servicio => {
+            servicio.img64 = null;
+            if (servicio.fotoServicio) {
+                try {
+                    servicio.img64 = Buffer.from(servicio.fotoServicio).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64 (fotoServicio):', bufferError);
+                }
+            }
+        });
+
+        rowsPro[0].forEach(producto => {
+            producto.img64 = null;
+            if (producto.foto) {
+                try {
+                    producto.img64 = Buffer.from(producto.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+                }
+            }
+        });
+
+        rowsOfe[0].forEach(oferta => {
+            oferta.img64 = null;
+            if (oferta.foto) {
+                try {
+                    oferta.img64 = Buffer.from(oferta.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+                }
+            }
+        });
+
+        rowsUbi[0].forEach(ubicacion => {
+            ubicacion.img64 = null;
+            if (ubicacion.fotoUbicacion) {
+                try {
+                    ubicacion.img64 = Buffer.from(ubicacion.fotoUbicacion).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+                }
+            }
+        });
+
+        // Asignar los datos iniciales a los resultados
         resultados.barberos = rowsBar[0];
         resultados.servicios = rowsSer[0];
         resultados.productos = rowsPro[0];
@@ -198,13 +254,80 @@ const listarBarberoAdmin = async (req, res) => {
         }
 
         const [searchResults] = await pool.query(query);
+
+        // Convertir imágenes para los resultados de la búsqueda
+        switch (tipo) {
+            case "barbero":
+                searchResults.forEach(barbero => {
+                    barbero.img64 = null;
+                    if (barbero.foto) {
+                        try {
+                            barbero.img64 = Buffer.from(barbero.foto).toString('base64');
+                        } catch (bufferError) {
+                            console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+                        }
+                    }
+                });
+                break;
+            case "servicio":
+                searchResults.forEach(servicio => {
+                    servicio.img64 = null;
+                    if (servicio.fotoServicio) {
+                        try {
+                            servicio.img64 = Buffer.from(servicio.fotoServicio).toString('base64');
+                        } catch (bufferError) {
+                            console.error('Error al convertir la imagen a base64 (fotoServicio):', bufferError);
+                        }
+                    }
+                });
+                break;
+            case "producto":
+                searchResults.forEach(producto => {
+                    producto.img64 = null;
+                    if (producto.foto) {
+                        try {
+                            producto.img64 = Buffer.from(producto.foto).toString('base64');
+                        } catch (bufferError) {
+                            console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+                        }
+                    }
+                });
+                break;
+            case "oferta":
+                searchResults.forEach(oferta => {
+                    oferta.img64 = null;
+                    if (oferta.foto) {
+                        try {
+                            oferta.img64 = Buffer.from(oferta.foto).toString('base64');
+                        } catch (bufferError) {
+                            console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+                        }
+                    }
+                });
+                break;
+            case "ubicacions":
+                searchResults.forEach(ubicacion => {
+                    ubicacion.img64 = null;
+                    if (ubicacion.foto) {
+                        try {
+                            ubicacion.img64 = Buffer.from(ubicacion.foto).toString('base64');
+                        } catch (bufferError) {
+                            console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+                        }
+                    }
+                });
+                break;
+        }
+
         resultados[tipo + 's'] = searchResults;
 
         res.json(resultados);
     } catch (error) {
+        console.error('Error en buscar:', error);
         res.status(500).json({ message: error.message });
     }
 };
+
 
 /**
  * Esta funcion sirve para mostrar el calendario
@@ -274,7 +397,7 @@ const perfilBarbero = async (req, res) => {
                 barbero.img64 = null;
             }
         });
-        res.status(200).json({ barberos: barberos})
+        res.status(200).json({ barberos: barberos })
     } catch (error) {
         res.status(500).json(error);
     }
@@ -309,7 +432,7 @@ const verPerfilBarbero = async (req, res) => {
                 barbero.img64 = null;
             }
         });
-        res.status(200).json({ barberos: barberos, comentarios:rowsCom[0]})
+        res.status(200).json({ barberos: barberos, comentarios: rowsCom[0] })
     } catch (error) {
         res.status(500).json(error);
     }
@@ -327,7 +450,7 @@ const verPerfilBarberoAdmin = async (req, res) => {
     try {
         const [
             [rowsBar], [rowsCom]
-        ] = await Promise.all [
+        ] = await Promise.all[
             pool.query(`CALL LL_VER_PERFIL_BARBERO('${id}');`),
             pool.query(`CALL LL_VER_COMENTARIO_BARBERO('${id}');`)
         ]
@@ -345,11 +468,11 @@ const verPerfilBarberoAdmin = async (req, res) => {
                 barbero.img64 = null;
             }
         });
-        res.status(200).json({ barberos: barberos, comentarios:rowsCom[0]})
+        res.status(200).json({ barberos: barberos, comentarios: rowsCom[0] })
     } catch (error) {
         res.status(500).json(error);
     }
 }
 
-export {listarBarbero, listarBarberoAdmin, buscar, verCalendario, perfilBarbero, verPerfilBarbero, verPerfilBarberoAdmin}
+export { listarBarbero, listarBarberoAdmin, buscar, verCalendario, perfilBarbero, verPerfilBarbero, verPerfilBarberoAdmin }
 
