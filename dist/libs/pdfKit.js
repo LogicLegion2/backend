@@ -90,12 +90,12 @@ function generarPDFBarbero(_x3, _x4, _x5) {
 }
 function _generarPDFBarbero() {
   _generarPDFBarbero = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(params, dataLlamada, endLlamada) {
-    var id, _yield$pool$query3, _yield$pool$query4, rows, reservas, doc, tableArray;
+    var id, barbero, _yield$pool$query3, _yield$pool$query4, rows, reservas, doc, tableArray;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
           id = params['id'];
-          console.log("Id received: ".concat(id));
+          barbero = params['barbero'];
           _context2.prev = 2;
           _context2.next = 5;
           return _mysqlDb.pool.query("CALL LL_VER_RESERVA_BARBERO(".concat(id, ")"));
@@ -122,6 +122,7 @@ function _generarPDFBarbero() {
             headers: ["Ubicación", "Fecha", "Hora", "Cliente"],
             rows: reservas
           }; // Título del documento
+          doc.fontSize(13).text("Barbero: ".concat(barbero));
           doc.fontSize(30).text('Reservas Clientes', {
             align: 'center'
           });
@@ -133,17 +134,17 @@ function _generarPDFBarbero() {
 
           // Finaliza el doc
           doc.end();
-          _context2.next = 22;
+          _context2.next = 23;
           break;
-        case 19:
-          _context2.prev = 19;
+        case 20:
+          _context2.prev = 20;
           _context2.t0 = _context2["catch"](2);
           console.error(_context2.t0);
-        case 22:
+        case 23:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[2, 19]]);
+    }, _callee2, null, [[2, 20]]);
   }));
   return _generarPDFBarbero.apply(this, arguments);
 }

@@ -246,60 +246,177 @@ var buscar = exports.buscar = /*#__PURE__*/function () {
           rowsUbi = _yield$Promise$all4$5[0];
           _yield$Promise$all4$6 = _slicedToArray(_yield$Promise$all4[5], 1);
           rowsPre = _yield$Promise$all4$6[0];
-          // Convertir imágenes a base64
-          resultados.barberos = rowsBar[0];
-          resultados.servicios = rowsSer[0];
-          resultados.productos = rowsPro[0];
-          resultados.ofertas = rowsOfe[0];
-          resultados.ubicaciones = rowsUbi[0];
-          resultados.preguntas = rowsPre[0];
+          // Convertir imágenes para los datos iniciales
+          rowsBar[0].forEach(function (barbero) {
+            barbero.img64 = null;
+            if (barbero.foto) {
+              try {
+                barbero.img64 = Buffer.from(barbero.foto).toString('base64');
+              } catch (bufferError) {
+                console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+              }
+            }
+          });
+          rowsSer[0].forEach(function (servicio) {
+            servicio.img64 = null;
+            if (servicio.fotoServicio) {
+              try {
+                servicio.img64 = Buffer.from(servicio.fotoServicio).toString('base64');
+              } catch (bufferError) {
+                console.error('Error al convertir la imagen a base64 (fotoServicio):', bufferError);
+              }
+            }
+          });
+          rowsPro[0].forEach(function (producto) {
+            producto.img64 = null;
+            if (producto.foto) {
+              try {
+                producto.img64 = Buffer.from(producto.foto).toString('base64');
+              } catch (bufferError) {
+                console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+              }
+            }
+          });
+          rowsOfe[0].forEach(function (oferta) {
+            oferta.img64 = null;
+            if (oferta.foto) {
+              try {
+                oferta.img64 = Buffer.from(oferta.foto).toString('base64');
+              } catch (bufferError) {
+                console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+              }
+            }
+          });
+          rowsUbi[0].forEach(function (ubicacion) {
+            ubicacion.img64 = null;
+            if (ubicacion.fotoUbicacion) {
+              try {
+                ubicacion.img64 = Buffer.from(ubicacion.fotoUbicacion).toString('base64');
+              } catch (bufferError) {
+                console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+              }
+            }
+          });
+
+          // Asignar los datos iniciales a los resultados
+          resultados.barberos = rowsBar;
+          resultados.servicios = rowsSer;
+          resultados.productos = rowsPro;
+          resultados.ofertas = rowsOfe;
+          resultados.ubicaciones = rowsUbi;
+          resultados.preguntas = rowsPre;
 
           // Realizar la búsqueda específica
           query = '';
           _context3.t0 = tipo;
-          _context3.next = _context3.t0 === "barbero" ? 31 : _context3.t0 === "servicio" ? 33 : _context3.t0 === "producto" ? 35 : _context3.t0 === "oferta" ? 37 : _context3.t0 === "ubicacione" ? 39 : 41;
+          _context3.next = _context3.t0 === "barbero" ? 36 : _context3.t0 === "servicio" ? 38 : _context3.t0 === "producto" ? 40 : _context3.t0 === "oferta" ? 42 : _context3.t0 === "ubicacione" ? 44 : 46;
           break;
-        case 31:
+        case 36:
           query = "CALL LL_BUSCAR_BARBERO('".concat(desc, "')");
-          return _context3.abrupt("break", 42);
-        case 33:
+          return _context3.abrupt("break", 47);
+        case 38:
           query = "CALL LL_BUSCAR_SERVICIO('".concat(desc, "')");
-          return _context3.abrupt("break", 42);
-        case 35:
+          return _context3.abrupt("break", 47);
+        case 40:
           query = "CALL LL_BUSCAR_PRODUCTO('".concat(desc, "')");
-          return _context3.abrupt("break", 42);
-        case 37:
+          return _context3.abrupt("break", 47);
+        case 42:
           query = "CALL LL_BUSCAR_OFERTA('".concat(desc, "')");
-          return _context3.abrupt("break", 42);
-        case 39:
+          return _context3.abrupt("break", 47);
+        case 44:
           query = "CALL LL_BUSCAR_UBICACION('".concat(desc, "')");
-          return _context3.abrupt("break", 42);
-        case 41:
+          return _context3.abrupt("break", 47);
+        case 46:
           return _context3.abrupt("return", res.status(400).json({
             message: "Tipo de búsqueda no válido"
           }));
-        case 42:
-          _context3.next = 44;
+        case 47:
+          _context3.next = 49;
           return _mysqlDb.pool.query(query);
-        case 44:
+        case 49:
           _yield$pool$query3 = _context3.sent;
           _yield$pool$query4 = _slicedToArray(_yield$pool$query3, 1);
           searchResults = _yield$pool$query4[0];
+          _context3.t1 = tipo;
+          _context3.next = _context3.t1 === "barbero" ? 55 : _context3.t1 === "servicio" ? 57 : _context3.t1 === "producto" ? 59 : _context3.t1 === "oferta" ? 61 : _context3.t1 === "ubicacione" ? 63 : 65;
+          break;
+        case 55:
+          searchResults.forEach(function (barbero) {
+            barbero.img64 = null;
+            if (barbero.foto) {
+              try {
+                barbero.img64 = Buffer.from(barbero.foto).toString('base64');
+              } catch (bufferError) {
+                console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+              }
+            }
+          });
+          return _context3.abrupt("break", 65);
+        case 57:
+          searchResults.forEach(function (servicio) {
+            servicio.img64 = null;
+            if (servicio.fotoServicio) {
+              try {
+                servicio.img64 = Buffer.from(servicio.fotoServicio).toString('base64');
+              } catch (bufferError) {
+                console.error('Error al convertir la imagen a base64 (fotoServicio):', bufferError);
+              }
+            }
+          });
+          return _context3.abrupt("break", 65);
+        case 59:
+          searchResults.forEach(function (producto) {
+            producto.img64 = null;
+            if (producto.foto) {
+              try {
+                producto.img64 = Buffer.from(producto.foto).toString('base64');
+              } catch (bufferError) {
+                console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+              }
+            }
+          });
+          return _context3.abrupt("break", 65);
+        case 61:
+          searchResults.forEach(function (oferta) {
+            oferta.img64 = null;
+            if (oferta.foto) {
+              try {
+                oferta.img64 = Buffer.from(oferta.foto).toString('base64');
+              } catch (bufferError) {
+                console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+              }
+            }
+          });
+          return _context3.abrupt("break", 65);
+        case 63:
+          searchResults.forEach(function (ubicacion) {
+            ubicacion.img64 = null;
+            if (ubicacion.foto) {
+              try {
+                ubicacion.img64 = Buffer.from(ubicacion.foto).toString('base64');
+              } catch (bufferError) {
+                console.error('Error al convertir la imagen a base64 (foto):', bufferError);
+              }
+            }
+          });
+          return _context3.abrupt("break", 65);
+        case 65:
           resultados[tipo + 's'] = searchResults;
           res.json(resultados);
-          _context3.next = 54;
+          _context3.next = 73;
           break;
-        case 51:
-          _context3.prev = 51;
-          _context3.t1 = _context3["catch"](0);
+        case 69:
+          _context3.prev = 69;
+          _context3.t2 = _context3["catch"](0);
+          console.error('Error en buscar:', _context3.t2);
           res.status(500).json({
-            message: _context3.t1.message
+            message: _context3.t2.message
           });
-        case 54:
+        case 73:
         case "end":
           return _context3.stop();
       }
-    }, _callee3, null, [[0, 51]]);
+    }, _callee3, null, [[0, 69]]);
   }));
   return function buscar(_x5, _x6) {
     return _ref3.apply(this, arguments);
