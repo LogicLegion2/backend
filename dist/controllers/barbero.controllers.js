@@ -247,12 +247,12 @@ var buscar = exports.buscar = /*#__PURE__*/function () {
           _yield$Promise$all4$6 = _slicedToArray(_yield$Promise$all4[5], 1);
           rowsPre = _yield$Promise$all4$6[0];
           // Convertir imágenes a base64
-          resultados.barberos = rowsBar;
-          resultados.servicios = rowsSer;
-          resultados.productos = rowsPro;
-          resultados.ofertas = rowsOfe;
-          resultados.ubicaciones = rowsUbi;
-          resultados.preguntas = rowsPre;
+          resultados.barberos = rowsBar[0];
+          resultados.servicios = rowsSer[0];
+          resultados.productos = rowsPro[0];
+          resultados.ofertas = rowsOfe[0];
+          resultados.ubicaciones = rowsUbi[0];
+          resultados.preguntas = rowsPre[0];
 
           // Realizar la búsqueda específica
           query = '';
