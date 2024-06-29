@@ -122,7 +122,6 @@ function _generarPDFBarbero() {
             headers: ["Ubicación", "Fecha", "Hora", "Cliente"],
             rows: reservas
           }; // Título del documento
-          doc.fontSize(13).text("Barbero: ".concat(barbero));
           doc.fontSize(30).text('Reservas Clientes', {
             align: 'center'
           });
@@ -131,20 +130,22 @@ function _generarPDFBarbero() {
           doc.table(tableArray, {
             columnsSize: [155, 90, 90, 155]
           });
-
+          // Agrega el nombre del barbero al documento
+          doc.moveDown();
+          doc.fontSize(13).text("Barbero: ".concat(barbero));
           // Finaliza el doc
           doc.end();
-          _context2.next = 23;
+          _context2.next = 24;
           break;
-        case 20:
-          _context2.prev = 20;
+        case 21:
+          _context2.prev = 21;
           _context2.t0 = _context2["catch"](2);
           console.error(_context2.t0);
-        case 23:
+        case 24:
         case "end":
           return _context2.stop();
       }
-    }, _callee2, null, [[2, 20]]);
+    }, _callee2, null, [[2, 21]]);
   }));
   return _generarPDFBarbero.apply(this, arguments);
 }

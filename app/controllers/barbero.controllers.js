@@ -455,7 +455,6 @@ const verPerfilBarberoAdmin = async (req, res) => {
             pool.query(`CALL LL_VER_COMENTARIO_BARBERO('${id}');`)
         ]
         const barberos = rowsBar[0][0];
-
         barberos.forEach(barbero => {
             if (barbero.fotoPerfil) {
                 try {
@@ -468,6 +467,7 @@ const verPerfilBarberoAdmin = async (req, res) => {
                 barbero.img64 = null;
             }
         });
+        console.log(barberos);
         res.status(200).json({ barberos: barberos, comentarios: rowsCom[0] })
     } catch (error) {
         res.status(500).json(error);

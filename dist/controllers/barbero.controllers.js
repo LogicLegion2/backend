@@ -632,21 +632,22 @@ var verPerfilBarberoAdmin = exports.verPerfilBarberoAdmin = /*#__PURE__*/functio
               barbero.img64 = null;
             }
           });
+          console.log(barberos);
           res.status(200).json({
             barberos: barberos,
             comentarios: rowsCom[0]
           });
-          _context7.next = 18;
+          _context7.next = 19;
           break;
-        case 15:
-          _context7.prev = 15;
+        case 16:
+          _context7.prev = 16;
           _context7.t0 = _context7["catch"](1);
           res.status(500).json(_context7.t0);
-        case 18:
+        case 19:
         case "end":
           return _context7.stop();
       }
-    }, _callee7, null, [[1, 15]]);
+    }, _callee7, null, [[1, 16]]);
   }));
   return function verPerfilBarberoAdmin(_x13, _x14) {
     return _ref7.apply(this, arguments);
