@@ -27,14 +27,14 @@ var _dirname = (0, _path.dirname)(_filename);
 // Middleware para registrar las solicitudes HTTP en consola durante el desarrollo
 app.use((0, _morgan["default"])("dev"));
 
+// Middleware para permitir solicitudes CORS (Cross-Origin Resource Sharing)
+app.use((0, _cors["default"])());
+
 // Middleware para manejar JSON y formularios codificados en las solicitudes
 app.use(_express["default"].json());
 app.use(_express["default"].urlencoded({
   extended: true
 }));
-
-// Middleware para permitir solicitudes CORS (Cross-Origin Resource Sharing)
-app.use((0, _cors["default"])());
 
 // Middleware para utilizar las rutas definidas en ./routes/index.js para gestionar las solicitudes
 app.use("/", _index["default"]);
