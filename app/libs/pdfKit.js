@@ -92,12 +92,13 @@ export async function generarPDFBarbero(params, dataLlamada, endLlamada) {
         }; 
 
         // Título del documento
-        doc.fontSize(13).text(`Barbero: ${barbero}`);
         doc.fontSize(30).text('Reservas Clientes', { align: 'center' });
         doc.moveDown();
         // Agrega tabla al documento
         doc.table(tableArray, { columnsSize: [155, 90, 90, 155] });
-
+        // Agrega el nombre del barbero al documento
+        doc.moveDown();
+        doc.fontSize(13).text(`Barbero: ${barbero}`);
         // Finaliza el doc
         doc.end();
     } catch (error) {
