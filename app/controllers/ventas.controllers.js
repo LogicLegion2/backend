@@ -18,20 +18,21 @@ dayjs.locale('es'); // Establece el idioma a español
  * @param {object} res envia peticiones en HTML
  */
 const crearPago = async (req, res) => {
-    const id = req.body.id;
-    const metodoPago = req.body.metodoPago;
-    const precio = req.body.precio;
-    const metodoEntrega = req.body.metodoEntrega;
-    const direccion = req.body.direccion;
+    const { id, productos, totalGlobal, metodoPago, metodoEntrega, direccion } = req.body;
 
-    if (direccion == null) {
-        direccion == "";
-    }
     try {
-        const [respuesta] = await pool.query(`CALL LL_INSERTAR_VENTA('${id}','${metodoPago}','${precio}','${metodoEntrega}','${direccion}');`);
-        res.status(200).json(respuesta);
+        const [ventaResponse] = await pool.query(`CALL LL_INSERTAR_VENTA('${id}', '${metodoPago}', '${totalGlobal}', '${metodoEntrega}', '${direccion}');`);
+        const [idResponse] = await pool.query(`CALL LL_ULTIMO_ID_VENTA();`);
+        console.log(idResponse);
+        const idVenta = idResponse[0][0].idVenta;
+        console.log(idVenta);
+        for (const producto of productos) {
+            await pool.query(`CALL LL_INSERTAR_PRODUCTO_VENTA('${producto.idProducto}', '${idVenta}', '${producto.cantidad}');`);
+        }
+
+        res.status(200).json({ message: 'Compra realizada con éxito' });
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({ error: 'Error al registrar la compra' });
     }
 };
 
