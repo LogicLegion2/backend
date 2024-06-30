@@ -176,22 +176,4 @@ const buscarProducto = async (req, res) => {
     }
 };
 
-/**
- * Esta funcion sirve para insertar los productos a la venta
- * @param {object} req captura peticiones en HTML
- * @param {object} res envia peticiones en HTML
- */
- const insertarProductoVenta = async (req, res) => {
-    const idProducto = req.body.idProducto;
-    const idVenta = req.body.idVenta;
-    const cantidad = req.body.cantidad;
-
-    try {
-        const respuesta = await pool.query(`CALL LL_INSERTAR_PRODUCTO_VENTA('${idProducto}','${idVenta}','${cantidad}');`);
-        res.json(respuesta);
-    } catch (error) {
-        res.status(500).json(error);
-    }
-};
-
-export {listarProducto, listarProductosVendidos, buscarProducto, crearProducto, obtenerProducto, editarProducto, desactivarProducto, insertarProductoVenta}
+export {listarProducto, listarProductosVendidos, buscarProducto, crearProducto, obtenerProducto, editarProducto, desactivarProducto}

@@ -23,9 +23,8 @@ const crearPago = async (req, res) => {
     try {
         const [ventaResponse] = await pool.query(`CALL LL_INSERTAR_VENTA('${id}', '${metodoPago}', '${totalGlobal}', '${metodoEntrega}', '${direccion}');`);
         const [idResponse] = await pool.query(`CALL LL_ULTIMO_ID_VENTA();`);
-        console.log(idResponse);
         const idVenta = idResponse[0][0].idVenta;
-        console.log(idVenta);
+        
         for (const producto of productos) {
             await pool.query(`CALL LL_INSERTAR_PRODUCTO_VENTA('${producto.idProducto}', '${idVenta}', '${producto.cantidad}');`);
         }
@@ -163,7 +162,6 @@ const verEntregas = async (req, res) => {
     const id = req.params['id']
     try {
         const [rows] = await pool.query(`CALL LL_VER_ENTREGAS('${id}')`);
-        console.log(rows[0][0]);
         const entregas = rows[0].map(entrega => {
             const fecha = new Date(entrega.fecha).toLocaleDateString('es-ES', {
                 year: 'numeric',
@@ -209,4 +207,20 @@ const verReservasProductos = async (req, res) => {
     }
 };
 
-export { crearPago, crearReembolso, buscarProductoVendido, historialCompra, verCarroCompras, verEntregasAdmin, verEntregas, verReservasProductos }
+/**
+ * Esta funcion sirve para desactivar las entregas de los clientes
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+const desactivarEntrega = async (req, res) => {
+    const id = req.body.id;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_DESACTIVAR_ENTREGA('${id}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+export { crearPago, crearReembolso, buscarProductoVendido, desactivarEntrega, historialCompra, verCarroCompras, verEntregasAdmin, verEntregas, verReservasProductos }

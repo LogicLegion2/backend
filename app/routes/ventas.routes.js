@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { buscarProductoVendido, crearPago, crearReembolso, historialCompra, verCarroCompras, verEntregas, verEntregasAdmin, verReservasProductos } from "../controllers/ventas.controllers.js";
+import { buscarProductoVendido, crearPago, crearReembolso, desactivarEntrega, historialCompra, verCarroCompras, verEntregas, verEntregasAdmin, verReservasProductos } from "../controllers/ventas.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
 
 /**
@@ -14,6 +14,7 @@ rutaVentas.get("/historial/:id", historialCompra);
 rutaVentas.get("/buscar", buscarProductoVendido);
 rutaVentas.get("/entregas/admin", verEntregasAdmin);
 rutaVentas.get("/entregas/:id", verEntregas);
+rutaVentas.post("/desactivar", desactivarEntrega);
 rutaVentas.get("/productos",verReservasProductos);
 rutaVentas.get("/carrito/:id", verCarroCompras);
 
