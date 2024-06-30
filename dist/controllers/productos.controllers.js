@@ -4,7 +4,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.obtenerProducto = exports.listarProductosVendidos = exports.listarProducto = exports.insertarProductoVenta = exports.editarProducto = exports.desactivarProducto = exports.crearProducto = exports.buscarProducto = void 0;
+exports.obtenerProducto = exports.listarProductosVendidos = exports.listarProducto = exports.editarProducto = exports.desactivarProducto = exports.crearProducto = exports.buscarProducto = void 0;
 var _mysqlDb = require("../config/mysql.db.js");
 var _promise = _interopRequireDefault(require("mysql2/promise.js"));
 var _dotenv = require("dotenv");
@@ -334,42 +334,5 @@ var desactivarProducto = exports.desactivarProducto = /*#__PURE__*/function () {
   }));
   return function desactivarProducto(_x13, _x14) {
     return _ref7.apply(this, arguments);
-  };
-}();
-
-/**
- * Esta funcion sirve para insertar los productos a la venta
- * @param {object} req captura peticiones en HTML
- * @param {object} res envia peticiones en HTML
- */
-var insertarProductoVenta = exports.insertarProductoVenta = /*#__PURE__*/function () {
-  var _ref8 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8(req, res) {
-    var idProducto, idVenta, cantidad, _respuesta5;
-    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-      while (1) switch (_context8.prev = _context8.next) {
-        case 0:
-          idProducto = req.body.idProducto;
-          idVenta = req.body.idVenta;
-          cantidad = req.body.cantidad;
-          _context8.prev = 3;
-          _context8.next = 6;
-          return _mysqlDb.pool.query("CALL LL_INSERTAR_PRODUCTO_VENTA('".concat(idProducto, "','").concat(idVenta, "','").concat(cantidad, "');"));
-        case 6:
-          _respuesta5 = _context8.sent;
-          res.json(_respuesta5);
-          _context8.next = 13;
-          break;
-        case 10:
-          _context8.prev = 10;
-          _context8.t0 = _context8["catch"](3);
-          res.status(500).json(_context8.t0);
-        case 13:
-        case "end":
-          return _context8.stop();
-      }
-    }, _callee8, null, [[3, 10]]);
-  }));
-  return function insertarProductoVenta(_x15, _x16) {
-    return _ref8.apply(this, arguments);
   };
 }();

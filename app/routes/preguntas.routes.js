@@ -13,7 +13,7 @@ rutaPreguntas.get("/buscar", buscarPregunta);
 rutaPreguntas.post("/crear", crearPregunta);
 rutaPreguntas.get("/obtener/:id", obtenerPregunta);
 rutaPreguntas.post("/editar", editarPregunta);
-rutaPreguntas.post("/desactivar", desactivarPregunta);
+rutaPreguntas.post("/desactivar", verificarToken, desactivarPregunta);
 
 
 export default rutaPreguntas;

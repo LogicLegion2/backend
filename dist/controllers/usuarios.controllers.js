@@ -328,14 +328,7 @@ var login = exports.login = /*#__PURE__*/function () {
           };
           token = _jsonwebtoken["default"].sign(payload, process.env.TOKEN_PRIVATEKEY, {
             expiresIn: process.env.TOKEN_EXPIRES_IN
-          }); // const rol = usuario.rol
-          // const id = usuario.idUsuario
-          // if (usuario.rol === "barbero") {
-          //     const respuestaBar = await pool.query(`CALL LL_OBTENER_BARBERO('${id}')`);
-          //     const barbero = respuestaBar[0][0][0];
-          //     id = barbero.id;
-          //     console.log(id);
-          // }
+          });
           res.status(200).json({
             error: false,
             token: token,

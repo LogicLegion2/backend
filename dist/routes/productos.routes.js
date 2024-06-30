@@ -16,7 +16,6 @@ rutaProductos.get("/vendidos", _productosControllers.listarProductosVendidos);
 rutaProductos.get("/buscar", _productosControllers.buscarProducto);
 rutaProductos.post("/crear", _productosControllers.crearProducto);
 rutaProductos.get("/:id", _productosControllers.obtenerProducto);
-rutaProductos.post("/prod/venta", _productosControllers.insertarProductoVenta);
 rutaProductos.get("/obtener/:id", _productosControllers.obtenerProducto);
 rutaProductos.post("/editar", _productosControllers.editarProducto);
 rutaProductos.post("/desactivar", _productosControllers.desactivarProducto);

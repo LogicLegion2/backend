@@ -35,7 +35,7 @@ function _asyncToGenerator(n) { return function () { var t = this, e = arguments
  */
 var listarBarbero = exports.listarBarbero = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res) {
-    var _yield$Promise$all, _yield$Promise$all2, _yield$Promise$all2$, rowsBar, _yield$Promise$all2$2, rowsSer, _yield$Promise$all2$3, rowsPro, _yield$Promise$all2$4, rowsOfe, _yield$Promise$all2$5, rowsUbi, _yield$Promise$all2$6, rowsPre, barberos, servicios, productos, ofertas, ubicaciones;
+    var _yield$Promise$all, _yield$Promise$all2, _yield$Promise$all2$, rowsBar, _yield$Promise$all2$2, rowsSer, _yield$Promise$all2$3, rowsPro, _yield$Promise$all2$4, rowsOfe, _yield$Promise$all2$5, rowsUbi, _yield$Promise$all2$6, rowsPre, barberos, servicios, productos, ofertas, ubicaciones, preguntas;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
@@ -62,6 +62,7 @@ var listarBarbero = exports.listarBarbero = /*#__PURE__*/function () {
           productos = rowsPro[0];
           ofertas = rowsOfe[0];
           ubicaciones = rowsUbi[0];
+          preguntas = rowsPre[0];
           barberos.forEach(function (barbero) {
             if (barbero.foto) {
               try {
@@ -122,14 +123,13 @@ var listarBarbero = exports.listarBarbero = /*#__PURE__*/function () {
               ubicacion.img64 = null;
             }
           });
-          console.log(productos);
           res.status(200).json({
             barberos: barberos,
             servicios: servicios,
             productos: productos,
             ofertas: ofertas,
             ubicaciones: ubicaciones,
-            preguntas: rowsPre
+            preguntas: preguntas
           });
           _context.next = 34;
           break;
@@ -206,7 +206,7 @@ var listarBarberoAdmin = exports.listarBarberoAdmin = /*#__PURE__*/function () {
  */
 var buscar = exports.buscar = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(req, res) {
-    var _req$query, desc, tipo, resultados, _yield$Promise$all3, _yield$Promise$all4, _yield$Promise$all4$, rowsBar, _yield$Promise$all4$2, rowsSer, _yield$Promise$all4$3, rowsPro, _yield$Promise$all4$4, rowsOfe, _yield$Promise$all4$5, rowsUbi, _yield$Promise$all4$6, rowsPre, query, _yield$pool$query3, _yield$pool$query4, searchResults;
+    var _req$query, desc, tipo, resultados, _yield$Promise$all3, _yield$Promise$all4, _yield$Promise$all4$, rowsBar, _yield$Promise$all4$2, rowsSer, _yield$Promise$all4$3, rowsPro, _yield$Promise$all4$4, rowsOfe, _yield$Promise$all4$5, rowsUbi, _yield$Promise$all4$6, rowsPre, barberos, servicios, productos, ofertas, ubicaciones, preguntas, query, _yield$pool$query3, _yield$pool$query4, resulBusqueda;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
@@ -246,8 +246,13 @@ var buscar = exports.buscar = /*#__PURE__*/function () {
           rowsUbi = _yield$Promise$all4$5[0];
           _yield$Promise$all4$6 = _slicedToArray(_yield$Promise$all4[5], 1);
           rowsPre = _yield$Promise$all4$6[0];
-          // Convertir imágenes para los datos iniciales
-          rowsBar[0].forEach(function (barbero) {
+          barberos = rowsBar[0];
+          servicios = rowsSer[0];
+          productos = rowsPro[0];
+          ofertas = rowsOfe[0];
+          ubicaciones = rowsUbi[0];
+          preguntas = rowsPre[0]; // Convertir imágenes para los datos iniciales
+          barberos.forEach(function (barbero) {
             barbero.img64 = null;
             if (barbero.foto) {
               try {
@@ -257,7 +262,7 @@ var buscar = exports.buscar = /*#__PURE__*/function () {
               }
             }
           });
-          rowsSer[0].forEach(function (servicio) {
+          servicios.forEach(function (servicio) {
             servicio.img64 = null;
             if (servicio.fotoServicio) {
               try {
@@ -267,7 +272,7 @@ var buscar = exports.buscar = /*#__PURE__*/function () {
               }
             }
           });
-          rowsPro[0].forEach(function (producto) {
+          productos.forEach(function (producto) {
             producto.img64 = null;
             if (producto.foto) {
               try {
@@ -277,7 +282,7 @@ var buscar = exports.buscar = /*#__PURE__*/function () {
               }
             }
           });
-          rowsOfe[0].forEach(function (oferta) {
+          ofertas.forEach(function (oferta) {
             oferta.img64 = null;
             if (oferta.foto) {
               try {
@@ -287,7 +292,7 @@ var buscar = exports.buscar = /*#__PURE__*/function () {
               }
             }
           });
-          rowsUbi[0].forEach(function (ubicacion) {
+          ubicaciones.forEach(function (ubicacion) {
             ubicacion.img64 = null;
             if (ubicacion.fotoUbicacion) {
               try {
@@ -299,49 +304,49 @@ var buscar = exports.buscar = /*#__PURE__*/function () {
           });
 
           // Asignar los datos iniciales a los resultados
-          resultados.barberos = rowsBar;
-          resultados.servicios = rowsSer;
-          resultados.productos = rowsPro;
-          resultados.ofertas = rowsOfe;
-          resultados.ubicaciones = rowsUbi;
-          resultados.preguntas = rowsPre;
-
+          resultados.barberos = rowsBar[0];
+          resultados.servicios = rowsSer[0];
+          resultados.productos = rowsPro[0];
+          resultados.ofertas = rowsOfe[0];
+          resultados.ubicaciones = rowsUbi[0];
+          resultados.preguntas = rowsPre[0];
+          console.log(resultados.barberos);
           // Realizar la búsqueda específica
           query = '';
           _context3.t0 = tipo;
-          _context3.next = _context3.t0 === "barbero" ? 36 : _context3.t0 === "servicio" ? 38 : _context3.t0 === "producto" ? 40 : _context3.t0 === "oferta" ? 42 : _context3.t0 === "ubicacione" ? 44 : 46;
+          _context3.next = _context3.t0 === "barbero" ? 43 : _context3.t0 === "servicio" ? 45 : _context3.t0 === "producto" ? 47 : _context3.t0 === "oferta" ? 49 : _context3.t0 === "ubicacione" ? 51 : 53;
           break;
-        case 36:
+        case 43:
           query = "CALL LL_BUSCAR_BARBERO('".concat(desc, "')");
-          return _context3.abrupt("break", 47);
-        case 38:
+          return _context3.abrupt("break", 54);
+        case 45:
           query = "CALL LL_BUSCAR_SERVICIO('".concat(desc, "')");
-          return _context3.abrupt("break", 47);
-        case 40:
+          return _context3.abrupt("break", 54);
+        case 47:
           query = "CALL LL_BUSCAR_PRODUCTO('".concat(desc, "')");
-          return _context3.abrupt("break", 47);
-        case 42:
+          return _context3.abrupt("break", 54);
+        case 49:
           query = "CALL LL_BUSCAR_OFERTA('".concat(desc, "')");
-          return _context3.abrupt("break", 47);
-        case 44:
+          return _context3.abrupt("break", 54);
+        case 51:
           query = "CALL LL_BUSCAR_UBICACION('".concat(desc, "')");
-          return _context3.abrupt("break", 47);
-        case 46:
+          return _context3.abrupt("break", 54);
+        case 53:
           return _context3.abrupt("return", res.status(400).json({
             message: "Tipo de búsqueda no válido"
           }));
-        case 47:
-          _context3.next = 49;
+        case 54:
+          _context3.next = 56;
           return _mysqlDb.pool.query(query);
-        case 49:
+        case 56:
           _yield$pool$query3 = _context3.sent;
           _yield$pool$query4 = _slicedToArray(_yield$pool$query3, 1);
-          searchResults = _yield$pool$query4[0];
+          resulBusqueda = _yield$pool$query4[0];
           _context3.t1 = tipo;
-          _context3.next = _context3.t1 === "barbero" ? 55 : _context3.t1 === "servicio" ? 57 : _context3.t1 === "producto" ? 59 : _context3.t1 === "oferta" ? 61 : _context3.t1 === "ubicacione" ? 63 : 65;
+          _context3.next = _context3.t1 === "barbero" ? 62 : _context3.t1 === "servicio" ? 64 : _context3.t1 === "producto" ? 66 : _context3.t1 === "oferta" ? 68 : _context3.t1 === "ubicacione" ? 70 : 72;
           break;
-        case 55:
-          searchResults.forEach(function (barbero) {
+        case 62:
+          resulBusqueda[0].forEach(function (barbero) {
             barbero.img64 = null;
             if (barbero.foto) {
               try {
@@ -351,9 +356,9 @@ var buscar = exports.buscar = /*#__PURE__*/function () {
               }
             }
           });
-          return _context3.abrupt("break", 65);
-        case 57:
-          searchResults.forEach(function (servicio) {
+          return _context3.abrupt("break", 72);
+        case 64:
+          resulBusqueda[0].forEach(function (servicio) {
             servicio.img64 = null;
             if (servicio.fotoServicio) {
               try {
@@ -363,9 +368,9 @@ var buscar = exports.buscar = /*#__PURE__*/function () {
               }
             }
           });
-          return _context3.abrupt("break", 65);
-        case 59:
-          searchResults.forEach(function (producto) {
+          return _context3.abrupt("break", 72);
+        case 66:
+          resulBusqueda[0].forEach(function (producto) {
             producto.img64 = null;
             if (producto.foto) {
               try {
@@ -375,9 +380,9 @@ var buscar = exports.buscar = /*#__PURE__*/function () {
               }
             }
           });
-          return _context3.abrupt("break", 65);
-        case 61:
-          searchResults.forEach(function (oferta) {
+          return _context3.abrupt("break", 72);
+        case 68:
+          resulBusqueda[0].forEach(function (oferta) {
             oferta.img64 = null;
             if (oferta.foto) {
               try {
@@ -387,9 +392,9 @@ var buscar = exports.buscar = /*#__PURE__*/function () {
               }
             }
           });
-          return _context3.abrupt("break", 65);
-        case 63:
-          searchResults.forEach(function (ubicacion) {
+          return _context3.abrupt("break", 72);
+        case 70:
+          resulBusqueda[0].forEach(function (ubicacion) {
             ubicacion.img64 = null;
             if (ubicacion.foto) {
               try {
@@ -399,24 +404,24 @@ var buscar = exports.buscar = /*#__PURE__*/function () {
               }
             }
           });
-          return _context3.abrupt("break", 65);
-        case 65:
-          resultados[tipo + 's'] = searchResults;
+          return _context3.abrupt("break", 72);
+        case 72:
+          resultados[tipo + 's'] = resulBusqueda[0];
           res.json(resultados);
-          _context3.next = 73;
+          _context3.next = 80;
           break;
-        case 69:
-          _context3.prev = 69;
+        case 76:
+          _context3.prev = 76;
           _context3.t2 = _context3["catch"](0);
           console.error('Error en buscar:', _context3.t2);
           res.status(500).json({
             message: _context3.t2.message
           });
-        case 73:
+        case 80:
         case "end":
           return _context3.stop();
       }
-    }, _callee3, null, [[0, 69]]);
+    }, _callee3, null, [[0, 76]]);
   }));
   return function buscar(_x5, _x6) {
     return _ref3.apply(this, arguments);

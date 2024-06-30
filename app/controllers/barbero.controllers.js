@@ -32,6 +32,7 @@ const listarBarbero = async (req, res) => {
         const productos = rowsPro[0];
         const ofertas = rowsOfe[0];
         const ubicaciones = rowsUbi[0];
+        const preguntas = rowsPre[0];
 
         barberos.forEach(barbero => {
             if (barbero.foto) {
@@ -97,8 +98,7 @@ const listarBarbero = async (req, res) => {
                 ubicacion.img64 = null;
             }
         });
-        console.log(productos);
-        res.status(200).json({ barberos: barberos, servicios: servicios, productos: productos, ofertas: ofertas, ubicaciones: ubicaciones, preguntas: rowsPre });
+        res.status(200).json({ barberos: barberos, servicios: servicios, productos: productos, ofertas: ofertas, ubicaciones: ubicaciones, preguntas: preguntas });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -167,8 +167,15 @@ const buscar = async (req, res) => {
             pool.query("CALL LL_VER_PREGUNTAS()")
         ]);
 
+        const barberos = rowsBar[0];
+        const servicios = rowsSer[0];
+        const productos = rowsPro[0];
+        const ofertas = rowsOfe[0];
+        const ubicaciones = rowsUbi[0];
+        const preguntas = rowsPre[0];
+
         // Convertir imágenes para los datos iniciales
-        rowsBar[0].forEach(barbero => {
+        barberos.forEach(barbero => {
             barbero.img64 = null;
             if (barbero.foto) {
                 try {
@@ -179,7 +186,7 @@ const buscar = async (req, res) => {
             }
         });
 
-        rowsSer[0].forEach(servicio => {
+        servicios.forEach(servicio => {
             servicio.img64 = null;
             if (servicio.fotoServicio) {
                 try {
@@ -190,7 +197,7 @@ const buscar = async (req, res) => {
             }
         });
 
-        rowsPro[0].forEach(producto => {
+        productos.forEach(producto => {
             producto.img64 = null;
             if (producto.foto) {
                 try {
@@ -201,7 +208,7 @@ const buscar = async (req, res) => {
             }
         });
 
-        rowsOfe[0].forEach(oferta => {
+        ofertas.forEach(oferta => {
             oferta.img64 = null;
             if (oferta.foto) {
                 try {
@@ -212,7 +219,7 @@ const buscar = async (req, res) => {
             }
         });
 
-        rowsUbi[0].forEach(ubicacion => {
+        ubicaciones.forEach(ubicacion => {
             ubicacion.img64 = null;
             if (ubicacion.fotoUbicacion) {
                 try {
@@ -224,13 +231,13 @@ const buscar = async (req, res) => {
         });
 
         // Asignar los datos iniciales a los resultados
-        resultados.barberos = rowsBar;
-        resultados.servicios = rowsSer;
-        resultados.productos = rowsPro;
-        resultados.ofertas = rowsOfe;
-        resultados.ubicaciones = rowsUbi;
-        resultados.preguntas = rowsPre;
-
+        resultados.barberos = rowsBar[0];
+        resultados.servicios = rowsSer[0];
+        resultados.productos = rowsPro[0];
+        resultados.ofertas = rowsOfe[0];
+        resultados.ubicaciones = rowsUbi[0];
+        resultados.preguntas = rowsPre[0];
+console.log(resultados.barberos);
         // Realizar la búsqueda específica
         let query = '';
         switch (tipo) {
@@ -253,12 +260,12 @@ const buscar = async (req, res) => {
                 return res.status(400).json({ message: "Tipo de búsqueda no válido" });
         }
 
-        const [searchResults] = await pool.query(query);
+        const [resulBusqueda] = await pool.query(query);
 
         // Convertir imágenes para los resultados de la búsqueda
         switch (tipo) {
             case "barbero":
-                searchResults.forEach(barbero => {
+                resulBusqueda[0].forEach(barbero => {
                     barbero.img64 = null;
                     if (barbero.foto) {
                         try {
@@ -270,7 +277,7 @@ const buscar = async (req, res) => {
                 });
                 break;
             case "servicio":
-                searchResults.forEach(servicio => {
+                resulBusqueda[0].forEach(servicio => {
                     servicio.img64 = null;
                     if (servicio.fotoServicio) {
                         try {
@@ -282,7 +289,7 @@ const buscar = async (req, res) => {
                 });
                 break;
             case "producto":
-                searchResults.forEach(producto => {
+                resulBusqueda[0].forEach(producto => {
                     producto.img64 = null;
                     if (producto.foto) {
                         try {
@@ -294,7 +301,7 @@ const buscar = async (req, res) => {
                 });
                 break;
             case "oferta":
-                searchResults.forEach(oferta => {
+                resulBusqueda[0].forEach(oferta => {
                     oferta.img64 = null;
                     if (oferta.foto) {
                         try {
@@ -306,7 +313,7 @@ const buscar = async (req, res) => {
                 });
                 break;
             case "ubicacione":
-                searchResults.forEach(ubicacion => {
+                resulBusqueda[0].forEach(ubicacion => {
                     ubicacion.img64 = null;
                     if (ubicacion.foto) {
                         try {
@@ -318,8 +325,7 @@ const buscar = async (req, res) => {
                 });
                 break;
         }
-
-        resultados[tipo + 's'] = searchResults;
+        resultados[tipo + 's'] = resulBusqueda[0];
 
         res.json(resultados);
     } catch (error) {

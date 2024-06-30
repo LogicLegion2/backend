@@ -20,48 +20,38 @@ var error = function error(req, res, statusCode, message) {
 };
 var verificarToken = exports.verificarToken = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(req, res, next) {
-    var token, invalidToken, decoded;
+    var token, decoded;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
-          token = req.headers["x-access-token"] || req.query.token;
+          token = req.headers["x-access-token"];
           if (token) {
             _context.next = 3;
             break;
           }
           return _context.abrupt("return", error(req, res, 401, "No se ha proporcionado un token"));
         case 3:
-          _context.prev = 3;
-          _context.next = 6;
-          return _mysqlDb.pool.query("CALL LL_VER_TOKEN('".concat(token, "')"));
-        case 6:
-          invalidToken = _context.sent;
-          if (!(invalidToken && invalidToken[0].length > 0)) {
-            _context.next = 9;
-            break;
+          try {
+            // const invalidToken = await pool.query(`CALL LL_VER_TOKEN('${token}')`);
+            // if (invalidToken && invalidToken[0].length > 0) {
+            //     return error(req, res, 401, "Token invalido");
+            // }
+            decoded = _jsonwebtoken["default"].verify(token, process.env.TOKEN_PRIVATEKEY); // req.idUsuario = decoded.idUsuario; 
+            next();
+          } catch (err) {
+            if (err.name === 'TokenExpiredError') {
+              error(req, res, 401, "Token expirado");
+            } else if (err.name === 'JsonWebTokenError') {
+              error(req, res, 401, "Token invalido");
+            } else {
+              error(req, res, 500, "Ha fallado el proceso de autenticación");
+            }
           }
-          return _context.abrupt("return", error(req, res, 401, "Token invalido"));
-        case 9:
-          decoded = _jsonwebtoken["default"].verify(token, process.env.TOKEN_PRIVATEKEY);
-          req.idUsuario = decoded.idUsuario;
-          next();
-          _context.next = 17;
-          break;
-        case 14:
-          _context.prev = 14;
-          _context.t0 = _context["catch"](3);
-          if (_context.t0.name === 'TokenExpiredError') {
-            error(req, res, 401, "Token expirado");
-          } else if (_context.t0.name === 'JsonWebTokenError') {
-            error(req, res, 401, "Token invalido");
-          } else {
-            error(req, res, 500, "Ha fallado el proceso de autenticación");
-          }
-        case 17:
+        case 4:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[3, 14]]);
+    }, _callee);
   }));
   return function verificarToken(_x, _x2, _x3) {
     return _ref.apply(this, arguments);

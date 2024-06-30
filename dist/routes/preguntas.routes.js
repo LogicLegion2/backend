@@ -17,5 +17,5 @@ rutaPreguntas.get("/buscar", _preguntasControllers.buscarPregunta);
 rutaPreguntas.post("/crear", _preguntasControllers.crearPregunta);
 rutaPreguntas.get("/obtener/:id", _preguntasControllers.obtenerPregunta);
 rutaPreguntas.post("/editar", _preguntasControllers.editarPregunta);
-rutaPreguntas.post("/desactivar", _preguntasControllers.desactivarPregunta);
+rutaPreguntas.post("/desactivar", _oauth.verificarToken, _preguntasControllers.desactivarPregunta);
 var _default = exports["default"] = rutaPreguntas;
