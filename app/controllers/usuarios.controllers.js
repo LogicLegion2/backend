@@ -80,7 +80,6 @@ const crearBarbero = async (req, res) => {
         res.status(500).json({ error: "Error en el servidor, por favor inténtalo de nuevo más tarde" });
     }
 };
-
 /**
  * Esta funcion sirve para registrar los usuarios
  * @param {object} req captura peticiones en HTML
@@ -88,6 +87,8 @@ const crearBarbero = async (req, res) => {
  */
 const registroUsuario = async (req, res) => {
     const { nombre, correo, contrasena, telefono } = req.body;
+    const saltRounds = 10; // Define el número de rondas de sal
+   
     try {
         const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
 
