@@ -80,7 +80,6 @@ const crearBarbero = async (req, res) => {
         res.status(500).json({ error: "Error en el servidor, por favor inténtalo de nuevo más tarde" });
     }
 };
-
 /**
  * Esta funcion sirve para registrar los usuarios
  * @param {object} req captura peticiones en HTML
