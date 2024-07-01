@@ -4,7 +4,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verReservasProductos = exports.verEntregasAdmin = exports.verEntregas = exports.verCarroCompras = exports.historialCompra = exports.desactivarEntrega = exports.crearReembolso = exports.crearPago = exports.buscarProductoVendido = void 0;
+exports.verReservasProductos = exports.verEntregasAdmin = exports.verEntregas = exports.verCarroCompras = exports.historialCompra = exports.desactivarProductoCarrito = exports.desactivarEntrega = exports.crearReembolso = exports.crearPago = exports.buscarProductoVendido = void 0;
 var _mysqlDb = require("../config/mysql.db.js");
 var _dotenv = require("dotenv");
 var _dayjs = _interopRequireDefault(require("dayjs"));
@@ -472,5 +472,40 @@ var desactivarEntrega = exports.desactivarEntrega = /*#__PURE__*/function () {
   }));
   return function desactivarEntrega(_x17, _x18) {
     return _ref9.apply(this, arguments);
+  };
+}();
+
+/**
+ * Esta funcion sirve para desactivar las entregas de los clientes
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+var desactivarProductoCarrito = exports.desactivarProductoCarrito = /*#__PURE__*/function () {
+  var _ref10 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10(req, res) {
+    var idProducto, respuesta;
+    return _regeneratorRuntime().wrap(function _callee10$(_context10) {
+      while (1) switch (_context10.prev = _context10.next) {
+        case 0:
+          idProducto = req.body.idProducto;
+          _context10.prev = 1;
+          _context10.next = 4;
+          return _mysqlDb.pool.query("CALL LL_DESACTIVAR_PRODUCTO_CARRITO('".concat(idProducto, "');"));
+        case 4:
+          respuesta = _context10.sent;
+          res.json(respuesta);
+          _context10.next = 11;
+          break;
+        case 8:
+          _context10.prev = 8;
+          _context10.t0 = _context10["catch"](1);
+          res.status(500).json(_context10.t0);
+        case 11:
+        case "end":
+          return _context10.stop();
+      }
+    }, _callee10, null, [[1, 8]]);
+  }));
+  return function desactivarProductoCarrito(_x19, _x20) {
+    return _ref10.apply(this, arguments);
   };
 }();

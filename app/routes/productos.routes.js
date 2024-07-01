@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { buscarProducto, crearProducto, desactivarProducto, editarProducto, listarProducto, listarProductosVendidos, obtenerProducto } from "../controllers/productos.controllers.js";
+import { verificarToken } from "../middlewares/oauth.js";
 
 
 /**
@@ -14,7 +15,7 @@ rutaProductos.get("/buscar", buscarProducto);
 rutaProductos.post("/crear", crearProducto);
 rutaProductos.get("/:id", obtenerProducto);
 rutaProductos.get("/obtener/:id", obtenerProducto);
-rutaProductos.post("/editar", editarProducto);
-rutaProductos.post("/desactivar", desactivarProducto);
+rutaProductos.post("/editar", verificarToken, editarProducto);
+rutaProductos.post("/desactivar", verificarToken, desactivarProducto);
 
 export default rutaProductos;

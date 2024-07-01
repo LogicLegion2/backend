@@ -18,7 +18,7 @@ rutaReservaAdmin.get("/listar/:id", _reservasControllers.listarReservas);
 rutaReservaAdmin.get("/historial/:id", _reservasControllers.historialCita);
 rutaReservaAdmin.get("/historial/", _reservasControllers.historialReserva);
 rutaReservaAdmin.post("/crear", _reservasControllers.crearReserva);
-rutaReservaAdmin.post("/cancelar", _reservasControllers.cancelarReserva);
+rutaReservaAdmin.post("/cancelar", _oauth.verificarToken, _reservasControllers.cancelarReserva);
 rutaReservaAdmin.get("/pdf", function (req, res) {
   // Configuración de cabeceras de respuesta para el PDF generado
   var stream = res.writeHead(200, {

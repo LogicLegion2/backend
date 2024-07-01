@@ -9,6 +9,6 @@ import { verificarToken } from "../middlewares/oauth.js";
 const rutaComentarios = Router();
 
 rutaComentarios.post("/crear", crearComentario);
-rutaComentarios.post("/eliminar", eliminarComentario);
+rutaComentarios.post("/eliminar", verificarToken, eliminarComentario);
 
 export default rutaComentarios;

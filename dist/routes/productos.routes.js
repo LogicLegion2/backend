@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports["default"] = void 0;
 var _express = require("express");
 var _productosControllers = require("../controllers/productos.controllers.js");
+var _oauth = require("../middlewares/oauth.js");
 /**
  * Estas son las rutas del backend de productos en mi proyecto 
  * @type {object}
@@ -17,6 +18,6 @@ rutaProductos.get("/buscar", _productosControllers.buscarProducto);
 rutaProductos.post("/crear", _productosControllers.crearProducto);
 rutaProductos.get("/:id", _productosControllers.obtenerProducto);
 rutaProductos.get("/obtener/:id", _productosControllers.obtenerProducto);
-rutaProductos.post("/editar", _productosControllers.editarProducto);
-rutaProductos.post("/desactivar", _productosControllers.desactivarProducto);
+rutaProductos.post("/editar", _oauth.verificarToken, _productosControllers.editarProducto);
+rutaProductos.post("/desactivar", _oauth.verificarToken, _productosControllers.desactivarProducto);
 var _default = exports["default"] = rutaProductos;

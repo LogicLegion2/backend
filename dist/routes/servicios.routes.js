@@ -16,6 +16,6 @@ rutaServicios.get("/", _serviciosControllers.listarServicio);
 rutaServicios.get("/buscar", _serviciosControllers.buscarServicio);
 rutaServicios.post("/crear", _serviciosControllers.crearServicio);
 rutaServicios.get("/obtener/:id", _serviciosControllers.obtenerServicio);
-rutaServicios.post("/editar", _serviciosControllers.editarServicio);
-rutaServicios.post("/desactivar", _serviciosControllers.desactivarServicio);
+rutaServicios.post("/editar", _oauth.verificarToken, _serviciosControllers.editarServicio);
+rutaServicios.post("/desactivar", _oauth.verificarToken, _serviciosControllers.desactivarServicio);
 var _default = exports["default"] = rutaServicios;

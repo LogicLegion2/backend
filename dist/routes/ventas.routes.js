@@ -12,13 +12,14 @@ var _oauth = require("../middlewares/oauth.js");
  * @type {object}
  */
 var rutaVentas = (0, _express.Router)();
-rutaVentas.post("/compra", _ventasControllers.crearPago);
+rutaVentas.post("/compra", _oauth.verificarToken, _ventasControllers.crearPago);
 rutaVentas.post("/reembolso", _ventasControllers.crearReembolso);
 rutaVentas.get("/historial/:id", _ventasControllers.historialCompra);
 rutaVentas.get("/buscar", _ventasControllers.buscarProductoVendido);
 rutaVentas.get("/entregas/admin", _ventasControllers.verEntregasAdmin);
 rutaVentas.get("/entregas/:id", _ventasControllers.verEntregas);
 rutaVentas.post("/desactivar", _ventasControllers.desactivarEntrega);
+rutaVentas.post("/desactivar/carrito", _oauth.verificarToken, _ventasControllers.desactivarProductoCarrito);
 rutaVentas.get("/productos", _ventasControllers.verReservasProductos);
 rutaVentas.get("/carrito/:id", _ventasControllers.verCarroCompras);
 var _default = exports["default"] = rutaVentas;
