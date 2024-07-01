@@ -19,6 +19,7 @@ rutaVentas.get("/buscar", _ventasControllers.buscarProductoVendido);
 rutaVentas.get("/entregas/admin", _ventasControllers.verEntregasAdmin);
 rutaVentas.get("/entregas/:id", _ventasControllers.verEntregas);
 rutaVentas.post("/desactivar", _ventasControllers.desactivarEntrega);
+rutaVentas.post("/desactivar/carrito", _oauth.verificarToken, _ventasControllers.desactivarProductoCarrito);
 rutaVentas.get("/productos", _ventasControllers.verReservasProductos);
 rutaVentas.get("/carrito/:id", _ventasControllers.verCarroCompras);
 var _default = exports["default"] = rutaVentas;

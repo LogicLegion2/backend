@@ -223,4 +223,20 @@ const desactivarEntrega = async (req, res) => {
     }
 };
 
-export { crearPago, crearReembolso, buscarProductoVendido, desactivarEntrega, historialCompra, verCarroCompras, verEntregasAdmin, verEntregas, verReservasProductos }
+/**
+ * Esta funcion sirve para desactivar las entregas de los clientes
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+const desactivarProductoCarrito = async (req, res) => {
+    const idProducto = req.body.idProducto;
+
+    try {
+        const respuesta = await pool.query(`CALL LL_DESACTIVAR_PRODUCTO_CARRITO('${idProducto}');`);
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+export { crearPago, crearReembolso, buscarProductoVendido, desactivarEntrega, desactivarProductoCarrito, historialCompra, verCarroCompras, verEntregasAdmin, verEntregas, verReservasProductos }
