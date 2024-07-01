@@ -12,7 +12,6 @@ var _path = _interopRequireWildcard(require("path"));
 var _url = require("url");
 var _dotenv = _interopRequireDefault(require("dotenv"));
 var _cookieParser = _interopRequireDefault(require("cookie-parser"));
-var _paymentRoutes = _interopRequireDefault(require("./routes/payment.routes.js"));
 var _morgan = _interopRequireDefault(require("morgan"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { "default": e }; }
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
@@ -51,7 +50,4 @@ app.use(_express["default"]["static"](_path["default"].join(_dirname, '../../fro
 
 // Establece el puerto en el que escuchará el servidor, usando el puerto definido en las variables de entorno o el puerto 3000 por defecto
 app.set("port", process.env.PORT || 3000);
-
-// Configura las rutas para manejar pagos
-app.use(_paymentRoutes["default"]);
 var _default = exports["default"] = app;

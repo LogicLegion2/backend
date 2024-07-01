@@ -6,7 +6,6 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import paymentRoutes from "./routes/payment.routes.js";
 import morgan from "morgan";
 dotenv.config(); // Carga las variables de entorno desde el archivo .env
 const app = express(); // Crea una instancia de la aplicación Express
@@ -40,8 +39,5 @@ app.use(express.static(path.join(__dirname, '../../frontend/src/public')));
 
 // Establece el puerto en el que escuchará el servidor, usando el puerto definido en las variables de entorno o el puerto 3000 por defecto
 app.set("port", process.env.PORT || 3000);
-
-// Configura las rutas para manejar pagos
-app.use(paymentRoutes);
 
 export default app;
