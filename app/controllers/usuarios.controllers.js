@@ -88,6 +88,8 @@ const crearBarbero = async (req, res) => {
  */
 const registroUsuario = async (req, res) => {
     const { nombre, correo, contrasena, telefono } = req.body;
+    const saltRounds = 10; // Define el número de rondas de sal
+   
     try {
         const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
 
