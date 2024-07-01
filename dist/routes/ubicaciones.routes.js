@@ -16,6 +16,6 @@ rutaUbicaciones.get("/", _ubicacionesControllers.listarUbicacion);
 rutaUbicaciones.get("/buscar", _ubicacionesControllers.buscarUbicacion);
 rutaUbicaciones.post("/crear", _ubicacionesControllers.crearUbicacion);
 rutaUbicaciones.get("/obtener/:id", _ubicacionesControllers.obtenerUbicacion);
-rutaUbicaciones.post("/editar", _ubicacionesControllers.editarUbicacion);
-rutaUbicaciones.post("/desactivar", _ubicacionesControllers.desactivarUbicacion);
+rutaUbicaciones.post("/editar", _oauth.verificarToken, _ubicacionesControllers.editarUbicacion);
+rutaUbicaciones.post("/desactivar", _oauth.verificarToken, _ubicacionesControllers.desactivarUbicacion);
 var _default = exports["default"] = rutaUbicaciones;

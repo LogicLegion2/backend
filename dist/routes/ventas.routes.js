@@ -12,7 +12,7 @@ var _oauth = require("../middlewares/oauth.js");
  * @type {object}
  */
 var rutaVentas = (0, _express.Router)();
-rutaVentas.post("/compra", _ventasControllers.crearPago);
+rutaVentas.post("/compra", _oauth.verificarToken, _ventasControllers.crearPago);
 rutaVentas.post("/reembolso", _ventasControllers.crearReembolso);
 rutaVentas.get("/historial/:id", _ventasControllers.historialCompra);
 rutaVentas.get("/buscar", _ventasControllers.buscarProductoVendido);

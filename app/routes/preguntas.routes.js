@@ -12,7 +12,7 @@ rutaPreguntas.get("/", listarPregunta);
 rutaPreguntas.get("/buscar", buscarPregunta);
 rutaPreguntas.post("/crear", crearPregunta);
 rutaPreguntas.get("/obtener/:id", obtenerPregunta);
-rutaPreguntas.post("/editar", editarPregunta);
+rutaPreguntas.post("/editar", verificarToken, editarPregunta);
 rutaPreguntas.post("/desactivar", verificarToken, desactivarPregunta);
 
 

@@ -14,7 +14,7 @@ rutaReservaAdmin.get("/listar/:id", listarReservas);
 rutaReservaAdmin.get("/historial/:id", historialCita);
 rutaReservaAdmin.get("/historial/", historialReserva);
 rutaReservaAdmin.post("/crear", crearReserva);
-rutaReservaAdmin.post("/cancelar", cancelarReserva);
+rutaReservaAdmin.post("/cancelar", verificarToken, cancelarReserva);
 
 rutaReservaAdmin.get("/pdf", (req, res) => {
 

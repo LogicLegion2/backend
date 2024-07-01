@@ -12,7 +12,7 @@ rutaUbicaciones.get("/", listarUbicacion);
 rutaUbicaciones.get("/buscar", buscarUbicacion);
 rutaUbicaciones.post("/crear", crearUbicacion);
 rutaUbicaciones.get("/obtener/:id", obtenerUbicacion);
-rutaUbicaciones.post("/editar", editarUbicacion);
-rutaUbicaciones.post("/desactivar", desactivarUbicacion);
+rutaUbicaciones.post("/editar", verificarToken, editarUbicacion);
+rutaUbicaciones.post("/desactivar", verificarToken, desactivarUbicacion);
 
 export default rutaUbicaciones;
