@@ -17,7 +17,7 @@ rutaVentas.get("/entregas/:id", verEntregas);
 rutaVentas.post("/desactivar", desactivarEntrega);
 rutaVentas.post("/desactivar/carrito", verificarToken, desactivarProductoCarrito);
 rutaVentas.get("/productos",verReservasProductos);
-rutaVentas.post("/carrito/agregar/:producto", agregarProductoCarrito);
+rutaVentas.post("/carrito/agregar/:producto", verificarToken, agregarProductoCarrito);
 rutaVentas.get("/carrito/:id", verCarroCompras);
 
 export default rutaVentas; 

@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router, json } from "express";
 import rutaProductos from "./productos.routes.js";
 import rutaServicios from "./servicios.routes.js";
 import rutaUsuarios from "./usuarios.routes.js";
@@ -10,7 +10,8 @@ import rutaPreguntas from "./preguntas.routes.js";
 import rutaReservaAdmin from "./reservas.routes.js";
 import rutaVentas from "./ventas.routes.js";
 import rutaFavoritos from "./favoritos.routes.js";
-
+import swaggerUi from "swagger-ui-express";
+import swaggerFile from '../tools/swagger-output.json' assert { type: 'json' }
 
 /**
  * Estas son las rutas del backend en mi proyecto 
@@ -29,5 +30,8 @@ ruta.use("/preguntas", rutaPreguntas)
 ruta.use("/reservas", rutaReservaAdmin)
 ruta.use("/ventas", rutaVentas)
 ruta.use("/favoritos", rutaFavoritos)
+ruta.use('/doc', swaggerUi.serve,
+    swaggerUi.setup(swaggerFile)
+)
 
 export default ruta;
