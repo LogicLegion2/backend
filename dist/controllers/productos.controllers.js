@@ -194,12 +194,12 @@ var buscarProducto = exports.buscarProducto = /*#__PURE__*/function () {
  */
 var crearProducto = exports.crearProducto = /*#__PURE__*/function () {
   var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(req, res) {
-    var input, nombre, descripcion, precio, cantidad, foto, _respuesta;
+    var _req$body, nombre, descripcion, precio, cantidad, foto, _respuesta;
     return _regeneratorRuntime().wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
-          input = req.body;
-          nombre = input.nombre, descripcion = input.descripcion, precio = input.precio, cantidad = input.cantidad, foto = input.foto;
+          _req$body = req.body, nombre = _req$body.nombre, descripcion = _req$body.descripcion, precio = _req$body.precio, cantidad = _req$body.cantidad, foto = _req$body.foto;
+          console.log(foto);
           _context4.prev = 2;
           _context4.next = 5;
           return _mysqlDb.pool.query("CALL LL_INSERTAR_PRODUCTO(?,?,?,?,?);", [nombre, descripcion, precio, cantidad, foto]);

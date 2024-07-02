@@ -104,15 +104,8 @@ const buscarProducto = async (req, res) => {
  * @param {object} res envia peticiones en HTML
  */
  const crearProducto = async (req, res) => {
-    const input = req.body;
-    const {
-        nombre,
-        descripcion,
-        precio,
-        cantidad,
-        foto
-    } = input
-
+    const { nombre, descripcion, precio, cantidad, foto } = req.body;
+    console.log(foto);
     try {
         const respuesta = await pool.query("CALL LL_INSERTAR_PRODUCTO(?,?,?,?,?);", [nombre, descripcion, precio, cantidad, foto]);
         res.json(respuesta);
