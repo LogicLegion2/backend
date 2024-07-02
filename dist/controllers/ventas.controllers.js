@@ -4,7 +4,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.verReservasProductos = exports.verEntregasAdmin = exports.verEntregas = exports.verCarroCompras = exports.historialCompra = exports.desactivarProductoCarrito = exports.desactivarEntrega = exports.crearReembolso = exports.crearPago = exports.buscarProductoVendido = void 0;
+exports.verReservasProductos = exports.verEntregasAdmin = exports.verEntregas = exports.verCarroCompras = exports.historialCompra = exports.desactivarProductoCarrito = exports.desactivarEntrega = exports.crearReembolso = exports.crearPago = exports.buscarProductoVendido = exports.agregarProductoCarrito = void 0;
 var _mysqlDb = require("../config/mysql.db.js");
 var _dotenv = require("dotenv");
 var _dayjs = _interopRequireDefault(require("dayjs"));
@@ -507,5 +507,41 @@ var desactivarProductoCarrito = exports.desactivarProductoCarrito = /*#__PURE__*
   }));
   return function desactivarProductoCarrito(_x19, _x20) {
     return _ref10.apply(this, arguments);
+  };
+}();
+
+/**
+ * Esta funcion sirve para agregar un producto al carrito de compras
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+var agregarProductoCarrito = exports.agregarProductoCarrito = /*#__PURE__*/function () {
+  var _ref11 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee11(req, res) {
+    var id, producto, respuesta;
+    return _regeneratorRuntime().wrap(function _callee11$(_context11) {
+      while (1) switch (_context11.prev = _context11.next) {
+        case 0:
+          id = req.body.id;
+          producto = req.params['producto'];
+          _context11.prev = 2;
+          _context11.next = 5;
+          return _mysqlDb.pool.query("CALL LL_INSERTAR_PRODUCTO_CARRITO('".concat(id, "','").concat(producto, "');"));
+        case 5:
+          respuesta = _context11.sent;
+          res.status(200).json(respuesta);
+          _context11.next = 12;
+          break;
+        case 9:
+          _context11.prev = 9;
+          _context11.t0 = _context11["catch"](2);
+          res.status(500).json(_context11.t0);
+        case 12:
+        case "end":
+          return _context11.stop();
+      }
+    }, _callee11, null, [[2, 9]]);
+  }));
+  return function agregarProductoCarrito(_x21, _x22) {
+    return _ref11.apply(this, arguments);
   };
 }();

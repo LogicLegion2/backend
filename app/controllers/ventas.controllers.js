@@ -239,4 +239,21 @@ const desactivarProductoCarrito = async (req, res) => {
     }
 };
 
-export { crearPago, crearReembolso, buscarProductoVendido, desactivarEntrega, desactivarProductoCarrito, historialCompra, verCarroCompras, verEntregasAdmin, verEntregas, verReservasProductos }
+/**
+ * Esta funcion sirve para agregar un producto al carrito de compras
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+const agregarProductoCarrito = async (req, res) => {
+    const id = req.body.id;
+    const producto = req.params['producto']
+
+    try {
+        const respuesta = await pool.query(`CALL LL_INSERTAR_PRODUCTO_CARRITO('${id}','${producto}');`);
+        res.status(200).json(respuesta);
+    } catch (error) {
+        res.status(500).json(error);
+    }
+};
+
+export { agregarProductoCarrito, crearPago, crearReembolso, buscarProductoVendido, desactivarEntrega, desactivarProductoCarrito, historialCompra, verCarroCompras, verEntregasAdmin, verEntregas, verReservasProductos }

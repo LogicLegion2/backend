@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { buscarProductoVendido, crearPago, crearReembolso, desactivarEntrega, desactivarProductoCarrito, historialCompra, verCarroCompras, verEntregas, verEntregasAdmin, verReservasProductos } from "../controllers/ventas.controllers.js";
+import { agregarProductoCarrito, buscarProductoVendido, crearPago, crearReembolso, desactivarEntrega, desactivarProductoCarrito, historialCompra, verCarroCompras, verEntregas, verEntregasAdmin, verReservasProductos } from "../controllers/ventas.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
 
 /**
@@ -17,6 +17,7 @@ rutaVentas.get("/entregas/:id", verEntregas);
 rutaVentas.post("/desactivar", desactivarEntrega);
 rutaVentas.post("/desactivar/carrito", verificarToken, desactivarProductoCarrito);
 rutaVentas.get("/productos",verReservasProductos);
+rutaVentas.post("/carrito/agregar/:producto", agregarProductoCarrito);
 rutaVentas.get("/carrito/:id", verCarroCompras);
 
 export default rutaVentas; 
