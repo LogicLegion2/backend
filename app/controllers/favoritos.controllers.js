@@ -95,8 +95,8 @@ const listarFavoritos = async (req, res) => {
  * @param {object} res envia peticiones en HTML
  */
  const crearBarberoFavorito = async (req, res) => {
-    const barbero = req.body.barbero;
-    const id = req.params['id']
+    const id = req.body.id;
+    const barbero = req.params['barbero']
 
     try {
         const respuesta = await pool.query(`CALL LL_INSERTAR_BARBERO_FAVORITO('${barbero}','${id}');`);
@@ -112,8 +112,8 @@ const listarFavoritos = async (req, res) => {
  * @param {object} res envia peticiones en HTML
  */
  const crearProductoFavorito = async (req, res) => {
-    const producto = req.body.producto;
-    const id = req.params['id']
+    const id = req.body.id;
+    const producto = req.params['producto']
 
     try {
         const respuesta = await pool.query(`CALL LL_INSERTAR_PRODUCTO_FAVORITO('${producto}','${id}');`);
@@ -129,8 +129,8 @@ const listarFavoritos = async (req, res) => {
  * @param {object} res envia peticiones en HTML
  */
  const crearOfertaFavorito = async (req, res) => {
-    const oferta = req.body.oferta;
-    const id = req.params['id']
+    const id = req.body.id;
+    const oferta = req.params['oferta']
 
     try {
         const respuesta = await pool.query(`CALL LL_INSERTAR_OFERTA_FAVORITO('${oferta}','${id}');`);
@@ -146,8 +146,8 @@ const listarFavoritos = async (req, res) => {
  * @param {object} res envia peticiones en HTML
  */
  const crearServicioFavorito = async (req, res) => {
-    const servicio = req.body.servicio;
-    const id = req.params['id']
+    const id = req.body.id;
+    const servicio = req.params['servicio']
 
     try {
         const respuesta = await pool.query(`CALL LL_INSERTAR_SERVICIO_FAVORITO('${servicio}','${id}');`);

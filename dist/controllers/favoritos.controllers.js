@@ -130,12 +130,12 @@ var listarFavoritos = exports.listarFavoritos = /*#__PURE__*/function () {
  */
 var crearBarberoFavorito = exports.crearBarberoFavorito = /*#__PURE__*/function () {
   var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(req, res) {
-    var barbero, id, respuesta;
+    var id, barbero, respuesta;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          barbero = req.body.barbero;
-          id = req.params['id'];
+          id = req.body.id;
+          barbero = req.params['barbero'];
           _context2.prev = 2;
           _context2.next = 5;
           return _mysqlDb.pool.query("CALL LL_INSERTAR_BARBERO_FAVORITO('".concat(barbero, "','").concat(id, "');"));
@@ -166,12 +166,12 @@ var crearBarberoFavorito = exports.crearBarberoFavorito = /*#__PURE__*/function 
  */
 var crearProductoFavorito = exports.crearProductoFavorito = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(req, res) {
-    var producto, id, respuesta;
+    var id, producto, respuesta;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
-          producto = req.body.producto;
-          id = req.params['id'];
+          id = req.body.id;
+          producto = req.params['producto'];
           _context3.prev = 2;
           _context3.next = 5;
           return _mysqlDb.pool.query("CALL LL_INSERTAR_PRODUCTO_FAVORITO('".concat(producto, "','").concat(id, "');"));
@@ -202,12 +202,12 @@ var crearProductoFavorito = exports.crearProductoFavorito = /*#__PURE__*/functio
  */
 var crearOfertaFavorito = exports.crearOfertaFavorito = /*#__PURE__*/function () {
   var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(req, res) {
-    var oferta, id, respuesta;
+    var id, oferta, respuesta;
     return _regeneratorRuntime().wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
-          oferta = req.body.oferta;
-          id = req.params['id'];
+          id = req.body.id;
+          oferta = req.params['oferta'];
           _context4.prev = 2;
           _context4.next = 5;
           return _mysqlDb.pool.query("CALL LL_INSERTAR_OFERTA_FAVORITO('".concat(oferta, "','").concat(id, "');"));
@@ -238,12 +238,12 @@ var crearOfertaFavorito = exports.crearOfertaFavorito = /*#__PURE__*/function ()
  */
 var crearServicioFavorito = exports.crearServicioFavorito = /*#__PURE__*/function () {
   var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(req, res) {
-    var servicio, id, respuesta;
+    var id, servicio, respuesta;
     return _regeneratorRuntime().wrap(function _callee5$(_context5) {
       while (1) switch (_context5.prev = _context5.next) {
         case 0:
-          servicio = req.body.servicio;
-          id = req.params['id'];
+          id = req.body.id;
+          servicio = req.params['servicio'];
           _context5.prev = 2;
           _context5.next = 5;
           return _mysqlDb.pool.query("CALL LL_INSERTAR_SERVICIO_FAVORITO('".concat(servicio, "','").concat(id, "');"));

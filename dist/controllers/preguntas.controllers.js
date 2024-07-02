@@ -115,11 +115,11 @@ var buscarPregunta = exports.buscarPregunta = /*#__PURE__*/function () {
  */
 var crearPregunta = exports.crearPregunta = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3(req, res) {
-    var _req$body, pregunta, resp, dbrespuesta;
+    var _req$body, pregunta, respuesta, dbrespuesta;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
         case 0:
-          _req$body = req.body, pregunta = _req$body.pregunta, resp = _req$body.resp;
+          _req$body = req.body, pregunta = _req$body.pregunta, respuesta = _req$body.respuesta;
           _context3.prev = 1;
           _context3.next = 4;
           return _mysqlDb.pool.query("CALL LL_INSERTAR_PREGUNTA('".concat(pregunta, "','").concat(respuesta, "');"));
@@ -150,7 +150,7 @@ var crearPregunta = exports.crearPregunta = /*#__PURE__*/function () {
  */
 var obtenerPregunta = exports.obtenerPregunta = /*#__PURE__*/function () {
   var _ref4 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4(req, res) {
-    var id, _respuesta;
+    var id, respuesta;
     return _regeneratorRuntime().wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
@@ -159,9 +159,9 @@ var obtenerPregunta = exports.obtenerPregunta = /*#__PURE__*/function () {
           _context4.next = 4;
           return _mysqlDb.pool.query("CALL LL_OBTENER_PREGUNTA('".concat(id, "');"));
         case 4:
-          _respuesta = _context4.sent;
-          if (_respuesta.length > 0) {
-            res.status(200).json(_respuesta[0][0][0]);
+          respuesta = _context4.sent;
+          if (respuesta.length > 0) {
+            res.status(200).json(respuesta[0][0][0]);
           } else {
             res.status(404).json({
               mensaje: "Pregunta no encontrada"
@@ -194,7 +194,7 @@ var obtenerPregunta = exports.obtenerPregunta = /*#__PURE__*/function () {
  */
 var editarPregunta = exports.editarPregunta = /*#__PURE__*/function () {
   var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(req, res) {
-    var _req$body2, pregunta, resp, id, _respuesta2;
+    var _req$body2, pregunta, resp, id, respuesta;
     return _regeneratorRuntime().wrap(function _callee5$(_context5) {
       while (1) switch (_context5.prev = _context5.next) {
         case 0:
@@ -203,7 +203,7 @@ var editarPregunta = exports.editarPregunta = /*#__PURE__*/function () {
           _context5.next = 4;
           return _mysqlDb.pool.query("CALL LL_EDITAR_PREGUNTA('".concat(pregunta, "', '").concat(resp, "', '").concat(id, "');"));
         case 4:
-          _respuesta2 = _context5.sent;
+          respuesta = _context5.sent;
           res.status(200).json({
             mensaje: 'Pregunta editada exitosamente'
           });
@@ -232,7 +232,7 @@ var editarPregunta = exports.editarPregunta = /*#__PURE__*/function () {
  */
 var desactivarPregunta = exports.desactivarPregunta = /*#__PURE__*/function () {
   var _ref6 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6(req, res) {
-    var id, _yield$pool$query5, _yield$pool$query6, _respuesta3;
+    var id, _yield$pool$query5, _yield$pool$query6, respuesta;
     return _regeneratorRuntime().wrap(function _callee6$(_context6) {
       while (1) switch (_context6.prev = _context6.next) {
         case 0:
@@ -243,8 +243,8 @@ var desactivarPregunta = exports.desactivarPregunta = /*#__PURE__*/function () {
         case 4:
           _yield$pool$query5 = _context6.sent;
           _yield$pool$query6 = _slicedToArray(_yield$pool$query5, 1);
-          _respuesta3 = _yield$pool$query6[0];
-          res.json(_respuesta3);
+          respuesta = _yield$pool$query6[0];
+          res.json(respuesta);
           _context6.next = 13;
           break;
         case 10:

@@ -201,7 +201,6 @@ var crearBarbero = exports.crearBarbero = /*#__PURE__*/function () {
     return _ref4.apply(this, arguments);
   };
 }();
-
 /**
  * Esta funcion sirve para registrar los usuarios
  * @param {object} req captura peticiones en HTML
@@ -209,38 +208,39 @@ var crearBarbero = exports.crearBarbero = /*#__PURE__*/function () {
  */
 var registroUsuario = exports.registroUsuario = /*#__PURE__*/function () {
   var _ref5 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5(req, res) {
-    var _req$body3, nombre, correo, contrasena, telefono, hashedPassword, resultado;
+    var _req$body3, nombre, correo, contrasena, telefono, saltRounds, hashedPassword, resultado;
     return _regeneratorRuntime().wrap(function _callee5$(_context5) {
       while (1) switch (_context5.prev = _context5.next) {
         case 0:
           _req$body3 = req.body, nombre = _req$body3.nombre, correo = _req$body3.correo, contrasena = _req$body3.contrasena, telefono = _req$body3.telefono;
-          _context5.prev = 1;
-          _context5.next = 4;
+          saltRounds = 10; // Define el número de rondas de sal
+          _context5.prev = 2;
+          _context5.next = 5;
           return _bcrypt["default"].hash(contrasena, saltRounds);
-        case 4:
+        case 5:
           hashedPassword = _context5.sent;
-          _context5.next = 7;
+          _context5.next = 8;
           return _mysqlDb.pool.query("CALL LL_REGISTRO_CLIENTE('".concat(nombre, "','").concat(correo, "','").concat(hashedPassword, "','").concat(telefono, "')"));
-        case 7:
+        case 8:
           resultado = _context5.sent;
           res.status(200).json({
             message: "Usuario creado con éxito",
             id: resultado.insertId
           });
-          _context5.next = 15;
+          _context5.next = 16;
           break;
-        case 11:
-          _context5.prev = 11;
-          _context5.t0 = _context5["catch"](1);
+        case 12:
+          _context5.prev = 12;
+          _context5.t0 = _context5["catch"](2);
           console.error(_context5.t0);
           res.status(500).json({
             error: "Error en el servidor, por favor inténtalo de nuevo más tarde"
           });
-        case 15:
+        case 16:
         case "end":
           return _context5.stop();
       }
-    }, _callee5, null, [[1, 11]]);
+    }, _callee5, null, [[2, 12]]);
   }));
   return function registroUsuario(_x9, _x10) {
     return _ref5.apply(this, arguments);
