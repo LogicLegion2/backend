@@ -9,9 +9,9 @@ import { verificarToken } from "../middlewares/oauth.js";
 const rutaFavoritos = Router();
 
 rutaFavoritos.get("/:id", listarFavoritos);
-rutaFavoritos.post("/barbero/:barbero", crearBarberoFavorito);
-rutaFavoritos.post("/servicio/:servicio", crearServicioFavorito);
-rutaFavoritos.post("/oferta/:oferta", crearOfertaFavorito);
-rutaFavoritos.post("/producto/:producto", crearProductoFavorito);
+rutaFavoritos.post("/barbero/:barbero", verificarToken, crearBarberoFavorito);
+rutaFavoritos.post("/servicio/:servicio", verificarToken, crearServicioFavorito);
+rutaFavoritos.post("/oferta/:oferta", verificarToken, crearOfertaFavorito);
+rutaFavoritos.post("/producto/:producto", verificarToken, crearProductoFavorito);
 
 export default rutaFavoritos;
