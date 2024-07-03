@@ -10,7 +10,7 @@ const rutaUbicaciones = Router();
 
 rutaUbicaciones.get("/", listarUbicacion);
 rutaUbicaciones.get("/buscar", buscarUbicacion);
-rutaUbicaciones.post("/crear", crearUbicacion);
+rutaUbicaciones.post("/crear", verificarToken, crearUbicacion);
 rutaUbicaciones.get("/obtener/:id", obtenerUbicacion);
 rutaUbicaciones.post("/editar", verificarToken, editarUbicacion);
 rutaUbicaciones.post("/desactivar", verificarToken, desactivarUbicacion);
