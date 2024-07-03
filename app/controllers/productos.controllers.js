@@ -104,10 +104,14 @@ const buscarProducto = async (req, res) => {
  * @param {object} res envia peticiones en HTML
  */
  const crearProducto = async (req, res) => {
-    const { nombre, descripcion, precio, cantidad, foto } = req.body;
-    console.log(foto);
+    const nombre = req.body.nombre;
+    const descripcion = req.body.descripcion;
+    const precio = req.body.precio;
+    const cantidad = req.body.cantidad;
+    const fotoProducto = req.body.fotoProducto;
+    console.log(nombre,descripcion, precio,cantidad,fotoProducto);
     try {
-        const respuesta = await pool.query("CALL LL_INSERTAR_PRODUCTO(?,?,?,?,?);", [nombre, descripcion, precio, cantidad, foto]);
+        const [respuesta] = await pool.query(`CALL LL_INSERTAR_PRODUCTO('${nombre}','${descripcion}','${precio}','${cantidad}','${fotoProducto}');`);
         res.json(respuesta);
     } catch (error) {
         res.status(500).json(error);

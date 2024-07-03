@@ -55,7 +55,7 @@ const crearUsuario = async (req, res) => {
         const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
 
         const resultado = await pool.query(`CALL LL_INSERTAR_USUARIO('${nombre}','${correo}','${hashedPassword}','${telefono}','${rol}','${foto}')`);
-
+console.log(resultado);
         res.status(200).json({ message: "Usuario creado con éxito", id: resultado.insertId });
     } catch (error) {
         res.status(500).json({ error: "Error en el servidor, por favor inténtalo de nuevo más tarde" });
