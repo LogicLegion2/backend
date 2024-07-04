@@ -6,6 +6,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import paymentRoutes from "./routes/payment.routes.js";
 import morgan from "morgan";
 dotenv.config(); // Carga las variables de entorno desde el archivo .env
 const app = express(); // Crea una instancia de la aplicación Express
@@ -26,6 +27,9 @@ app.use(express.urlencoded({extended:true}));
 
 // Middleware para utilizar las rutas definidas en ./routes/index.js para gestionar las solicitudes
 app.use("/",ruta);
+
+// Utilizar las rutas para pasarela de pagos en paypal
+app.use(paymentRoutes);
 
 // Middleware para manejar cookies en las solicitudes
 app.use(cookieParser())
