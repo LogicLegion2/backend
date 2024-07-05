@@ -7,6 +7,7 @@ import { application } from "express";
 import { HOST, PAYPAL_API, PAYPAL_API_CLIENT, PAYPAL_API_SECRET } from "../config/enviroment/config.js";
 import axios from "axios";
 
+const urlFrontend = process.env.FRONTEND_URL;
 /**
  * Crea una nueva orden de compra con la API de PayPal
  * @param {object} req - Objeto de solicitud HTTP, que contiene la información de la petición.
@@ -70,6 +71,8 @@ const captureOrder = async (req, res) => {
         }
     );
     console.log(response.data);
+
+    return res.redirect(`${urlFrontend}/cliente/carrito`)
 };
 
 /**
