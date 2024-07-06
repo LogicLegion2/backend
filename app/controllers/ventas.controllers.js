@@ -19,7 +19,6 @@ dayjs.locale('es'); // Establece el idioma a español
  */
 const crearPago = async (req, res) => {
     const { id, productos, totalGlobal, metodoPago, metodoEntrega, direccion } = req.body;
-
     try {
         const [ventaResponse] = await pool.query(`CALL LL_INSERTAR_VENTA('${id}', '${metodoPago}', '${totalGlobal}', '${metodoEntrega}', '${direccion}');`);
         const [idResponse] = await pool.query(`CALL LL_ULTIMO_ID_VENTA();`);
@@ -28,7 +27,7 @@ const crearPago = async (req, res) => {
         for (const producto of productos) {
             await pool.query(`CALL LL_INSERTAR_PRODUCTO_VENTA('${producto.idProducto}', '${idVenta}', '${producto.cantidad}');`);
         }
-
+        console.log(ventaResponse);
         res.status(200).json({ message: 'Compra realizada con éxito' });
     } catch (error) {
         res.status(500).json({ error: 'Error al registrar la compra' });
@@ -64,7 +63,21 @@ const buscarProductoVendido = async (req, res) => {
             return res.status(400).json({ message: "Se requiere patrón de búsqueda" });
         }
         const [rows] = await pool.query(`CALL LL_BUSCAR_VENDIDO('${desc}')`);
-        res.status(200).json({ productos: rows[0] })
+        const productos = rows[0];
+
+        productos.forEach(producto => {
+            if (producto.foto) {
+                try {
+                    producto.img64 = Buffer.from(producto.foto).toString('base64');
+                } catch (bufferError) {
+                    console.error('Error al convertir la imagen a base64:', bufferError);
+                    producto.img64 = null;
+                }
+            } else {
+                producto.img64 = null;
+            }
+        });
+        res.status(200).json({ productos: productos });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -119,7 +132,6 @@ const verCarroCompras = async (req, res) => {
     try {
         const respuesta = await pool.query(`CALL LL_VER_CARRITO_COMPRAS('${id}');`);
         const productos = respuesta[0][0]
-        console.log(productos);
         productos.forEach(producto => {
             if (producto.fotoProducto) {
                 try {
@@ -230,9 +242,10 @@ const desactivarEntrega = async (req, res) => {
  */
 const desactivarProductoCarrito = async (req, res) => {
     const idProducto = req.body.idProducto;
-
+    const id = req.body.id;
+    
     try {
-        const respuesta = await pool.query(`CALL LL_DESACTIVAR_PRODUCTO_CARRITO('${idProducto}');`);
+        const respuesta = await pool.query(`CALL LL_DESACTIVAR_PRODUCTO_CARRITO('${idProducto}','${id}');`);
         res.json(respuesta);
     } catch (error) {
         res.status(500).json(error);

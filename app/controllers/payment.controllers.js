@@ -14,18 +14,20 @@ const urlFrontend = process.env.FRONTEND_URL;
  * @param {object} res - Objeto de respuesta HTTP, que se utiliza para enviar una respuesta al cliente.
  */
 const createOrder = async (req, res) => {
+    const { totalGlobal } = req.body;
+    
     const order = {
         intent: "CAPTURE",
         purchase_units: [
             {
                 amount: {
                     currency_code: "USD",
-                    value: "100.00"
+                    value: totalGlobal
                 }
             },
         ],
         application_context: {
-            brand_name: "Mi tienda",
+            brand_name: "Barber's Brothers",
             landing_page: "NO_PREFERENCE",
             user_action: "PAY_NOW",
             return_url: `${HOST}/capture-order`,
@@ -72,7 +74,7 @@ const captureOrder = async (req, res) => {
     );
     console.log(response.data);
 
-    return res.redirect(`${urlFrontend}/cliente/carrito`)
+    return res.redirect(`${urlFrontend}/cliente/carrito?status=success`)
 };
 
 /**
@@ -80,7 +82,7 @@ const captureOrder = async (req, res) => {
  * @param {object} req - Objeto de solicitud HTTP, que contiene la información de la petición.
  * @param {object} res - Objeto de respuesta HTTP, que se utiliza para enviar una respuesta al cliente.
  */
-const cancelOrder = (req, res) => res.send("Orden cancelada");
+const cancelOrder = (req, res) => res.redirect(`${urlFrontend}/cliente/carrito?status=error`)
 
 
 export { createOrder, captureOrder, cancelOrder }

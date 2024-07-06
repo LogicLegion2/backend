@@ -109,7 +109,6 @@ const buscarProducto = async (req, res) => {
     const precio = req.body.precio;
     const cantidad = req.body.cantidad;
     const fotoProducto = req.body.fotoProducto;
-    console.log(nombre,descripcion, precio,cantidad,fotoProducto);
     try {
         const [respuesta] = await pool.query(`CALL LL_INSERTAR_PRODUCTO('${nombre}','${descripcion}','${precio}','${cantidad}','${fotoProducto}');`);
         res.json(respuesta);

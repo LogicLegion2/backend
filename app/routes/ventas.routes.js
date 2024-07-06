@@ -8,7 +8,7 @@ import { verificarToken } from "../middlewares/oauth.js";
  */
 const rutaVentas = Router();
 
-rutaVentas.post("/compra", verificarToken, crearPago);
+rutaVentas.post("/compra", crearPago);
 rutaVentas.post("/reembolso", crearReembolso);
 rutaVentas.get("/historial/:id", historialCompra);
 rutaVentas.get("/buscar", buscarProductoVendido);
