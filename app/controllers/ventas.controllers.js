@@ -18,17 +18,32 @@ dayjs.locale('es'); // Establece el idioma a español
  * @param {object} res envia peticiones en HTML
  */
 const crearPago = async (req, res) => {
-    const { id, productos, totalGlobal, metodoPago, metodoEntrega, direccion } = req.body;
+    const { id, productos, totalGlobal, metodoEntrega, direccion } = req.body;
     try {
-        const [ventaResponse] = await pool.query(`CALL LL_INSERTAR_VENTA('${id}', '${metodoPago}', '${totalGlobal}', '${metodoEntrega}', '${direccion}');`);
+        const [ventaResponse] = await pool.query(`CALL LL_INSERTAR_VENTA('${id}', '${totalGlobal}', '${metodoEntrega}', '${direccion}');`);
         const [idResponse] = await pool.query(`CALL LL_ULTIMO_ID_VENTA();`);
         const idVenta = idResponse[0][0].idVenta;
         
         for (const producto of productos) {
             await pool.query(`CALL LL_INSERTAR_PRODUCTO_VENTA('${producto.idProducto}', '${idVenta}', '${producto.cantidad}');`);
         }
-        console.log(ventaResponse);
         res.status(200).json({ message: 'Compra realizada con éxito' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al registrar la compra' });
+    }
+};
+
+/**
+ * Esta funcion sirve para cancelar la última venta realizada
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+const cancelarUltimaVenta = async (req, res) => {
+    const { id } = req.body;
+    try {
+        const [response] = await pool.query(`CALL LL_CANCELAR_ULTIMA_VENTA('${id}');`);
+
+        res.status(200).json({ response });
     } catch (error) {
         res.status(500).json({ error: 'Error al registrar la compra' });
     }
@@ -152,6 +167,22 @@ const verCarroCompras = async (req, res) => {
 }
 
 /**
+ * Esta funcion sirve para limpiar la lista de productos en el carrito de compras
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
+const reiniciarCarritoCompras = async (req, res) => {
+    const { id } = req.body;
+    try {
+        const [response] = await pool.query(`CALL LL_REINICIAR_CARRITO('${id}');`);
+
+        res.status(200).json({ response });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al registrar la compra' });
+    }
+};
+
+/**
  * Esta funcion sirve para que el admin ver las entregas
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
@@ -159,7 +190,18 @@ const verCarroCompras = async (req, res) => {
 const verEntregasAdmin = async (req, res) => {
     try {
         const rows = await pool.query(`CALL LL_VER_ENTREGAS_ADMIN()`);
-        res.status(200).json({ entregas: rows[0] });
+        const entregas = rows[0][0].map(entrega => {
+            const fecha = new Date(entrega.fecha).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit'
+            });
+            return {
+                ...entrega,
+                fecha
+            };
+        });
+        res.status(200).json({ entregas });
     } catch (error) {
         res.status(500).json(error);
     }
@@ -269,4 +311,4 @@ const agregarProductoCarrito = async (req, res) => {
     }
 };
 
-export { agregarProductoCarrito, crearPago, crearReembolso, buscarProductoVendido, desactivarEntrega, desactivarProductoCarrito, historialCompra, verCarroCompras, verEntregasAdmin, verEntregas, verReservasProductos }
+export { agregarProductoCarrito, cancelarUltimaVenta, crearPago, crearReembolso, buscarProductoVendido, desactivarEntrega, desactivarProductoCarrito, historialCompra, reiniciarCarritoCompras, verCarroCompras, verEntregasAdmin, verEntregas, verReservasProductos }

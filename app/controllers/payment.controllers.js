@@ -82,7 +82,7 @@ const captureOrder = async (req, res) => {
  * @param {object} req - Objeto de solicitud HTTP, que contiene la información de la petición.
  * @param {object} res - Objeto de respuesta HTTP, que se utiliza para enviar una respuesta al cliente.
  */
-const cancelOrder = (req, res) => res.redirect(`${urlFrontend}/cliente/carrito?status=error`)
+const cancelOrder = (req, res) => res.redirect(`${urlFrontend}/cliente/comprar?status=error`)
 
 
 export { createOrder, captureOrder, cancelOrder }

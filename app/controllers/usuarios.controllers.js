@@ -87,14 +87,14 @@ const crearBarbero = async (req, res) => {
  */
 const registroUsuario = async (req, res) => {
     const { nombre, correo, contrasena, telefono } = req.body;
-    const saltRounds = 10; // Define el número de rondas de sal
+    const saltRounds = 10; 
    
     try {
         const hashedPassword = await bcrypt.hash(contrasena, saltRounds);
 
         const resultado = await pool.query(`CALL LL_REGISTRO_CLIENTE('${nombre}','${correo}','${hashedPassword}','${telefono}')`);
 
-        res.status(200).json({ message: "Usuario creado con éxito", id: resultado.insertId });
+        res.status(200).json({ message: "Usuario creado con éxito", resultado});
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Error en el servidor, por favor inténtalo de nuevo más tarde" });
