@@ -14,7 +14,7 @@ var _oauth = require("../middlewares/oauth.js");
 var rutaUbicaciones = (0, _express.Router)();
 rutaUbicaciones.get("/", _ubicacionesControllers.listarUbicacion);
 rutaUbicaciones.get("/buscar", _ubicacionesControllers.buscarUbicacion);
-rutaUbicaciones.post("/crear", _ubicacionesControllers.crearUbicacion);
+rutaUbicaciones.post("/crear", _oauth.verificarToken, _ubicacionesControllers.crearUbicacion);
 rutaUbicaciones.get("/obtener/:id", _ubicacionesControllers.obtenerUbicacion);
 rutaUbicaciones.post("/editar", _oauth.verificarToken, _ubicacionesControllers.editarUbicacion);
 rutaUbicaciones.post("/desactivar", _oauth.verificarToken, _ubicacionesControllers.desactivarUbicacion);

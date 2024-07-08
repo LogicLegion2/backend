@@ -1,25 +1,21 @@
 import express, {urlencoded} from "express";
-import ruta from "./routes/index.js";
+import ruta from "./routes/index";
 import cors from "cors";
 import path from "path";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import paymentRoutes from "./routes/payment.routes.js";
+import paymentRoutes from "./routes/payment.routes";
 import morgan from "morgan";
 dotenv.config(); // Carga las variables de entorno desde el archivo .env
 const app = express(); // Crea una instancia de la aplicación Express
 
-// Configuración de rutas de registro de peticiones HTTP
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+// Middleware para permitir solicitudes CORS (Cross-Origin Resource Sharing)
+app.use(cors());
 
 // Middleware para registrar las solicitudes HTTP en consola durante el desarrollo
 app.use(morgan("dev"))
-
-// Middleware para permitir solicitudes CORS (Cross-Origin Resource Sharing)
-app.use(cors());
 
 // Middleware para manejar JSON y formularios codificados en las solicitudes
 app.use(express.json());

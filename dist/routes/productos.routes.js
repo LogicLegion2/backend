@@ -15,7 +15,7 @@ var rutaProductos = (0, _express.Router)();
 rutaProductos.get("/", _productosControllers.listarProducto);
 rutaProductos.get("/vendidos", _productosControllers.listarProductosVendidos);
 rutaProductos.get("/buscar", _productosControllers.buscarProducto);
-rutaProductos.post("/crear", _productosControllers.crearProducto);
+rutaProductos.post("/crear", _oauth.verificarToken, _productosControllers.crearProducto);
 rutaProductos.get("/:id", _productosControllers.obtenerProducto);
 rutaProductos.get("/obtener/:id", _productosControllers.obtenerProducto);
 rutaProductos.post("/editar", _oauth.verificarToken, _productosControllers.editarProducto);

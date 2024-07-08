@@ -1,17 +1,17 @@
 import { Router, json } from "express";
-import rutaProductos from "./productos.routes.js";
-import rutaServicios from "./servicios.routes.js";
-import rutaUsuarios from "./usuarios.routes.js";
-import rutaUbicaciones from "./ubicaciones.routes.js";
-import rutaBarberos from "./barbero.routes.js";
-import rutaComentarios from "./comentarios.routes.js";
-import rutaOfertas from "./ofertas.routes.js";
-import rutaPreguntas from "./preguntas.routes.js";
-import rutaReservaAdmin from "./reservas.routes.js";
-import rutaVentas from "./ventas.routes.js";
-import rutaFavoritos from "./favoritos.routes.js";
+import rutaProductos from "./productos.routes";
+import rutaServicios from "./servicios.routes";
+import rutaUsuarios from "./usuarios.routes";
+import rutaUbicaciones from "./ubicaciones.routes";
+import rutaBarberos from "./barbero.routes";
+import rutaComentarios from "./comentarios.routes";
+import rutaOfertas from "./ofertas.routes";
+import rutaPreguntas from "./preguntas.routes";
+import rutaReservaAdmin from "./reservas.routes";
+import rutaVentas from "./ventas.routes";
+import rutaFavoritos from "./favoritos.routes";
 import swaggerUi from "swagger-ui-express";
-import swaggerFile from '../tools/swagger-output.json' assert { type: 'json' }
+import swaggerFile from '../tools/swagger-output'
 
 /**
  * Estas son las rutas del backend en mi proyecto 

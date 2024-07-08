@@ -3,15 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "dev": "nodemon app/index.js",
-    "build": "babel app --out-dir dist && copyfiles -u 1 app/**/* dist",
-    "start": "node app/index.js",
+    "swagger-dev": "node dist/tools/swagger.js",
+    "dev": "nodemon app/index.js --exec babel-node",
+    "build": "babel app --out-dir dist",
+    "start": "node dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "doc": "jsdoc -c jsdoc.json",
-    "swagger": "node app/tools/swagger.js",
-    "swaggerdev": "node dist/tools/swagger.js"
+    "swagger": "node dist/tools/swagger.js"
   },
   "keywords": [],
   "author": "",
@@ -41,6 +40,7 @@
     "@babel/cli": "^7.24.7",
     "@babel/core": "^7.24.7",
     "@babel/node": "^7.24.7",
+    "@babel/plugin-transform-runtime": "^7.24.7",
     "@babel/preset-env": "^7.24.7",
     "jsdoc": "^4.0.3",
     "nodemon": "^3.1.3"

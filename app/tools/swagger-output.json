@@ -149,6 +149,11 @@
         "description": "",
         "parameters": [
           {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -165,6 +170,9 @@
                 },
                 "foto": {
                   "example": "any"
+                },
+                "apply(this": {
+                  "example": "any"
                 }
               }
             }
@@ -173,6 +181,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           },
           "500": {
             "description": "Internal Server Error"
@@ -185,7 +196,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -247,7 +258,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -285,7 +296,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -323,7 +334,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -361,7 +372,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -417,7 +428,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -553,7 +564,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -641,23 +652,6 @@
     "/login": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "correo": {
-                  "example": "any"
-                },
-                "contrasena": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -674,29 +668,6 @@
     "/registro": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "nombre": {
-                  "example": "any"
-                },
-                "correo": {
-                  "example": "any"
-                },
-                "contrasena": {
-                  "example": "any"
-                },
-                "telefono": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -712,31 +683,9 @@
         "description": "",
         "parameters": [
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "nombre": {
-                  "example": "any"
-                },
-                "correo": {
-                  "example": "any"
-                },
-                "contrasena": {
-                  "example": "any"
-                },
-                "telefono": {
-                  "example": "any"
-                },
-                "rol": {
-                  "example": "any"
-                },
-                "foto": {
-                  "example": "any"
-                }
-              }
-            }
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -752,35 +701,6 @@
     "/barbero": {
       "post": {
         "description": "",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "nombre": {
-                  "example": "any"
-                },
-                "correo": {
-                  "example": "any"
-                },
-                "contrasena": {
-                  "example": "any"
-                },
-                "telefono": {
-                  "example": "any"
-                },
-                "descripcion": {
-                  "example": "any"
-                },
-                "fotoPerfil": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -802,7 +722,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -843,7 +763,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -884,7 +804,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -925,7 +845,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -966,7 +886,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -1016,7 +936,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -1057,7 +977,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -1098,7 +1018,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -1139,7 +1059,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -1180,7 +1100,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -1221,7 +1141,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -1265,7 +1185,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           }
@@ -1285,7 +1205,27 @@
         "description": "",
         "parameters": [
           {
-            "name": "x-access-token",
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/ultima": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -1297,20 +1237,37 @@
               "properties": {
                 "id": {
                   "example": "any"
-                },
-                "productos": {
-                  "example": "any"
-                },
-                "totalGlobal": {
-                  "example": "any"
-                },
-                "metodoPago": {
-                  "example": "any"
-                },
-                "metodoEntrega": {
-                  "example": "any"
-                },
-                "direccion": {
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/reiniciar": {
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "apply(this",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "id": {
                   "example": "any"
                 }
               }
@@ -1396,7 +1353,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
@@ -1407,6 +1364,9 @@
               "type": "object",
               "properties": {
                 "idProducto": {
+                  "example": "any"
+                },
+                "id": {
                   "example": "any"
                 }
               }
@@ -1447,7 +1407,7 @@
             "type": "string"
           },
           {
-            "name": "x-access-token",
+            "name": "apply(this",
             "in": "header",
             "type": "string"
           },
