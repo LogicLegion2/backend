@@ -7,10 +7,11 @@ exports.PORT = exports.PAYPAL_API_SECRET = exports.PAYPAL_API_CLIENT = exports.P
 var _dotenv = require("dotenv");
 (0, _dotenv.config)();
 var PORT = exports.PORT = 3000;
-var HOST = exports.HOST = "https://backend-barberia-tsn6.onrender.com";
+var HOST = exports.HOST = "https://backend-production-64de.up.railway.app";
 var PAYPAL_API_CLIENT = exports.PAYPAL_API_CLIENT = process.env.PAYPAL_API_CLIENT;
 var PAYPAL_API_SECRET = exports.PAYPAL_API_SECRET = process.env.PAYPAL_API_SECRET;
 var PAYPAL_API = exports.PAYPAL_API = "https://api-m.sandbox.paypal.com";
-console.log(PAYPAL_API);
-console.log(PAYPAL_API_CLIENT);
-console.log(PAYPAL_API_SECRET);
+
+// console.log(PAYPAL_API);
+// console.log(PAYPAL_API_CLIENT);
+// console.log(PAYPAL_API_SECRET);

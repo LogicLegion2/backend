@@ -4,7 +4,7 @@
  */
 
 import { application } from "express";
-import { HOST, PAYPAL_API, PAYPAL_API_CLIENT, PAYPAL_API_SECRET } from "../config/enviroment/config.js";
+import { HOST, PAYPAL_API, PAYPAL_API_CLIENT, PAYPAL_API_SECRET } from "../config/enviroment/config";
 import axios from "axios";
 
 const urlFrontend = process.env.FRONTEND_URL;
@@ -72,7 +72,6 @@ const captureOrder = async (req, res) => {
             }
         }
     );
-    console.log(response.data);
 
     return res.redirect(`${urlFrontend}/cliente/carrito?status=success`)
 };

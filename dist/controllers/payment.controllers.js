@@ -8,7 +8,7 @@ exports.createOrder = exports.captureOrder = exports.cancelOrder = void 0;
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 var _express = require("express");
-var _config = require("../config/enviroment/config.js");
+var _config = require("../config/enviroment/config");
 var _axios = _interopRequireDefault(require("axios"));
 /**
  * Este es el controlador de payment
@@ -98,9 +98,8 @@ var captureOrder = exports.captureOrder = /*#__PURE__*/function () {
           });
         case 3:
           response = _context2.sent;
-          console.log(response.data);
           return _context2.abrupt("return", res.redirect("".concat(urlFrontend, "/cliente/carrito?status=success")));
-        case 6:
+        case 5:
         case "end":
           return _context2.stop();
       }
