@@ -12,6 +12,6 @@ var _oauth = require("../middlewares/oauth.js");
  * @type {object}
  */
 var rutaComentarios = (0, _express.Router)();
-rutaComentarios.post("/crear", _comentariosControllers.crearComentario);
+rutaComentarios.post("/crear", _oauth.verificarToken, _comentariosControllers.crearComentario);
 rutaComentarios.post("/eliminar", _oauth.verificarToken, _comentariosControllers.eliminarComentario);
 var _default = exports["default"] = rutaComentarios;

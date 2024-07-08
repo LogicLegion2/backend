@@ -84,7 +84,11 @@ dayjs.locale('es'); // Establece el idioma a español
         const [respuesta] = await pool.query(`CALL LL_INSERTAR_RESERVA('${id}','${barbero}','${servicio}','${ubicacion}','${hora}','${comentario}','${fecha}')`);
         res.status(200).json(respuesta);
     } catch (error) {
-        res.status(500).json(error, "La reserva con estos valores ya fue tomada");
+        if (error.sqlMessage === 'La reserva ya existe') {
+            res.status(400).json({ message: 'Esta reserva ya fue tomada, intenta con otros datos.' });
+        } else {
+            res.status(500).json({ message: 'Error al crear la reserva.', error });
+        }
     }
 };
 

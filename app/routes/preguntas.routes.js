@@ -10,7 +10,7 @@ const rutaPreguntas = Router();
 
 rutaPreguntas.get("/", listarPregunta);
 rutaPreguntas.get("/buscar", buscarPregunta);
-rutaPreguntas.post("/crear", crearPregunta);
+rutaPreguntas.post("/crear", verificarToken, crearPregunta);
 rutaPreguntas.get("/obtener/:id", obtenerPregunta);
 rutaPreguntas.post("/editar", verificarToken, editarPregunta);
 rutaPreguntas.post("/desactivar", verificarToken, desactivarPregunta);

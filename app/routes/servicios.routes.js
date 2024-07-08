@@ -11,7 +11,7 @@ const rutaServicios = Router();
 
 rutaServicios.get("/", listarServicio);
 rutaServicios.get("/buscar", buscarServicio);
-rutaServicios.post("/crear", crearServicio);
+rutaServicios.post("/crear", verificarToken, crearServicio);
 rutaServicios.get("/obtener/:id", obtenerServicio);
 rutaServicios.post("/editar", verificarToken, editarServicio);
 rutaServicios.post("/desactivar", verificarToken, desactivarServicio);

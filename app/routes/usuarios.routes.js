@@ -14,7 +14,7 @@ rutaUsuarios.get("/admin/:id", verPerfilAdmin);
 rutaUsuarios.get("/cliente/:id", verPerfil);
 rutaUsuarios.post("/login", login);
 rutaUsuarios.post("/registro", registroUsuario);
-rutaUsuarios.post("/registrar", crearUsuario);
+rutaUsuarios.post("/registrar", verificarToken, crearUsuario);
 rutaUsuarios.post("/barbero", crearBarbero);
 rutaUsuarios.post("/nombre/:id", verificarToken, cambiarNombre);
 rutaUsuarios.post("/telefono/:id", verificarToken, cambiarTelefono);

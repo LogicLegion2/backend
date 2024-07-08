@@ -18,7 +18,7 @@ rutaUsuarios.get("/admin/:id", _usuariosControllers.verPerfilAdmin);
 rutaUsuarios.get("/cliente/:id", _usuariosControllers.verPerfil);
 rutaUsuarios.post("/login", _usuariosControllers.login);
 rutaUsuarios.post("/registro", _usuariosControllers.registroUsuario);
-rutaUsuarios.post("/registrar", _usuariosControllers.crearUsuario);
+rutaUsuarios.post("/registrar", _oauth.verificarToken, _usuariosControllers.crearUsuario);
 rutaUsuarios.post("/barbero", _usuariosControllers.crearBarbero);
 rutaUsuarios.post("/nombre/:id", _oauth.verificarToken, _usuariosControllers.cambiarNombre);
 rutaUsuarios.post("/telefono/:id", _oauth.verificarToken, _usuariosControllers.cambiarTelefono);
