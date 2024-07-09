@@ -301,10 +301,11 @@ const desactivarProductoCarrito = async (req, res) => {
  */
 const agregarProductoCarrito = async (req, res) => {
     const id = req.body.id;
+    const cantidad = req.body.cantidad;
     const producto = req.params['producto']
 
+    const respuesta = await pool.query(`CALL LL_INSERTAR_PRODUCTO_CARRITO('${id}','${producto},${cantidad}`);
     try {
-        const respuesta = await pool.query(`CALL LL_INSERTAR_PRODUCTO_CARRITO('${id}','${producto}');`);
         res.status(200).json(respuesta);
     } catch (error) {
         res.status(500).json(error);
