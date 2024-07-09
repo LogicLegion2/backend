@@ -20,11 +20,11 @@ function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; 
 _dotenv["default"].config(); // Carga las variables de entorno desde el archivo .env
 var app = (0, _express["default"])(); // Crea una instancia de la aplicación Express
 
-// Middleware para permitir solicitudes CORS (Cross-Origin Resource Sharing)
-app.use((0, _cors["default"])());
-
 // Middleware para registrar las solicitudes HTTP en consola durante el desarrollo
 app.use((0, _morgan["default"])("dev"));
+
+// Middleware para permitir solicitudes CORS (Cross-Origin Resource Sharing)
+app.use((0, _cors["default"])());
 
 // Middleware para manejar JSON y formularios codificados en las solicitudes
 app.use(_express["default"].json());

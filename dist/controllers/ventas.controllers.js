@@ -37,62 +37,63 @@ var crearPago = exports.crearPago = /*#__PURE__*/function () {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           _req$body = req.body, id = _req$body.id, productos = _req$body.productos, totalGlobal = _req$body.totalGlobal, metodoEntrega = _req$body.metodoEntrega, direccion = _req$body.direccion;
-          _context.prev = 1;
-          _context.next = 4;
+          console.log(id, productos, totalGlobal, metodoEntrega, direccion);
+          _context.prev = 2;
+          _context.next = 5;
           return _mysqlDb.pool.query("CALL LL_INSERTAR_VENTA('".concat(id, "', '").concat(totalGlobal, "', '").concat(metodoEntrega, "', '").concat(direccion, "');"));
-        case 4:
+        case 5:
           _yield$pool$query = _context.sent;
           _yield$pool$query2 = (0, _slicedToArray2["default"])(_yield$pool$query, 1);
           ventaResponse = _yield$pool$query2[0];
-          _context.next = 9;
+          _context.next = 10;
           return _mysqlDb.pool.query("CALL LL_ULTIMO_ID_VENTA();");
-        case 9:
+        case 10:
           _yield$pool$query3 = _context.sent;
           _yield$pool$query4 = (0, _slicedToArray2["default"])(_yield$pool$query3, 1);
           idResponse = _yield$pool$query4[0];
           idVenta = idResponse[0][0].idVenta;
           _iterator = _createForOfIteratorHelper(productos);
-          _context.prev = 14;
+          _context.prev = 15;
           _iterator.s();
-        case 16:
+        case 17:
           if ((_step = _iterator.n()).done) {
-            _context.next = 22;
+            _context.next = 23;
             break;
           }
           producto = _step.value;
-          _context.next = 20;
+          _context.next = 21;
           return _mysqlDb.pool.query("CALL LL_INSERTAR_PRODUCTO_VENTA('".concat(producto.idProducto, "', '").concat(idVenta, "', '").concat(producto.cantidad, "');"));
-        case 20:
-          _context.next = 16;
+        case 21:
+          _context.next = 17;
           break;
-        case 22:
-          _context.next = 27;
+        case 23:
+          _context.next = 28;
           break;
-        case 24:
-          _context.prev = 24;
-          _context.t0 = _context["catch"](14);
+        case 25:
+          _context.prev = 25;
+          _context.t0 = _context["catch"](15);
           _iterator.e(_context.t0);
-        case 27:
-          _context.prev = 27;
+        case 28:
+          _context.prev = 28;
           _iterator.f();
-          return _context.finish(27);
-        case 30:
+          return _context.finish(28);
+        case 31:
           res.status(200).json({
             message: 'Compra realizada con éxito'
           });
-          _context.next = 36;
+          _context.next = 37;
           break;
-        case 33:
-          _context.prev = 33;
-          _context.t1 = _context["catch"](1);
+        case 34:
+          _context.prev = 34;
+          _context.t1 = _context["catch"](2);
           res.status(500).json({
             error: 'Error al registrar la compra'
           });
-        case 36:
+        case 37:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[1, 33], [14, 24, 27, 30]]);
+    }, _callee, null, [[2, 34], [15, 25, 28, 31]]);
   }));
   return function crearPago(_x, _x2) {
     return _ref.apply(this, arguments);
@@ -585,23 +586,24 @@ var desactivarProductoCarrito = exports.desactivarProductoCarrito = /*#__PURE__*
         case 0:
           idProducto = req.body.idProducto;
           id = req.body.id;
-          _context12.prev = 2;
-          _context12.next = 5;
+          console.log(idProducto, id);
+          _context12.prev = 3;
+          _context12.next = 6;
           return _mysqlDb.pool.query("CALL LL_DESACTIVAR_PRODUCTO_CARRITO('".concat(idProducto, "','").concat(id, "');"));
-        case 5:
+        case 6:
           respuesta = _context12.sent;
           res.json(respuesta);
-          _context12.next = 12;
+          _context12.next = 13;
           break;
-        case 9:
-          _context12.prev = 9;
-          _context12.t0 = _context12["catch"](2);
+        case 10:
+          _context12.prev = 10;
+          _context12.t0 = _context12["catch"](3);
           res.status(500).json(_context12.t0);
-        case 12:
+        case 13:
         case "end":
           return _context12.stop();
       }
-    }, _callee12, null, [[2, 9]]);
+    }, _callee12, null, [[3, 10]]);
   }));
   return function desactivarProductoCarrito(_x23, _x24) {
     return _ref12.apply(this, arguments);

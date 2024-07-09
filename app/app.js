@@ -11,11 +11,11 @@ import morgan from "morgan";
 dotenv.config(); // Carga las variables de entorno desde el archivo .env
 const app = express(); // Crea una instancia de la aplicación Express
 
-// Middleware para permitir solicitudes CORS (Cross-Origin Resource Sharing)
-app.use(cors());
-
 // Middleware para registrar las solicitudes HTTP en consola durante el desarrollo
 app.use(morgan("dev"))
+
+// Middleware para permitir solicitudes CORS (Cross-Origin Resource Sharing)
+app.use(cors());
 
 // Middleware para manejar JSON y formularios codificados en las solicitudes
 app.use(express.json());

@@ -19,11 +19,11 @@ dayjs.locale('es'); // Establece el idioma a español
  */
 const crearPago = async (req, res) => {
     const { id, productos, totalGlobal, metodoEntrega, direccion } = req.body;
+    console.log( id, productos, totalGlobal, metodoEntrega, direccion);
     try {
         const [ventaResponse] = await pool.query(`CALL LL_INSERTAR_VENTA('${id}', '${totalGlobal}', '${metodoEntrega}', '${direccion}');`);
         const [idResponse] = await pool.query(`CALL LL_ULTIMO_ID_VENTA();`);
         const idVenta = idResponse[0][0].idVenta;
-        
         for (const producto of productos) {
             await pool.query(`CALL LL_INSERTAR_PRODUCTO_VENTA('${producto.idProducto}', '${idVenta}', '${producto.cantidad}');`);
         }
@@ -285,7 +285,7 @@ const desactivarEntrega = async (req, res) => {
 const desactivarProductoCarrito = async (req, res) => {
     const idProducto = req.body.idProducto;
     const id = req.body.id;
-    
+    console.log(idProducto,id);
     try {
         const respuesta = await pool.query(`CALL LL_DESACTIVAR_PRODUCTO_CARRITO('${idProducto}','${id}');`);
         res.json(respuesta);
