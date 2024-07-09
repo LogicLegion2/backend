@@ -11,10 +11,10 @@ const rutaServicios = Router();
 
 rutaServicios.get("/", listarServicio);
 rutaServicios.get("/buscar", buscarServicio);
-rutaServicios.post("/crear", verificarToken, crearServicio);
+rutaServicios.post("/crear", crearServicio);
 rutaServicios.get("/obtener/:id", obtenerServicio);
-rutaServicios.post("/editar", verificarToken, editarServicio);
-rutaServicios.post("/desactivar", verificarToken, desactivarServicio);
+rutaServicios.post("/editar", editarServicio);
+rutaServicios.post("/desactivar", desactivarServicio);
 
 
 export default rutaServicios;

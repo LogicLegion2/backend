@@ -12,10 +12,10 @@ const rutaProductos = Router();
 rutaProductos.get("/", listarProducto);
 rutaProductos.get("/vendidos", listarProductosVendidos);
 rutaProductos.get("/buscar", buscarProducto);
-rutaProductos.post("/crear", verificarToken, crearProducto);
+rutaProductos.post("/crear", crearProducto);
 rutaProductos.get("/:id", obtenerProducto);
 rutaProductos.get("/obtener/:id", obtenerProducto);
-rutaProductos.post("/editar", verificarToken, editarProducto);
-rutaProductos.post("/desactivar", verificarToken, desactivarProducto);
+rutaProductos.post("/editar", editarProducto);
+rutaProductos.post("/desactivar", desactivarProducto);
 
 export default rutaProductos;

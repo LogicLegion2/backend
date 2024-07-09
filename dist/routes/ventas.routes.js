@@ -12,17 +12,17 @@ var _oauth = require("../middlewares/oauth.js");
  * @type {object}
  */
 var rutaVentas = (0, _express.Router)();
-rutaVentas.post("/compra", _oauth.verificarToken, _ventasControllers.crearPago);
-rutaVentas.post("/ultima", _oauth.verificarToken, _ventasControllers.cancelarUltimaVenta);
-rutaVentas.post("/reiniciar", _oauth.verificarToken, _ventasControllers.reiniciarCarritoCompras);
+rutaVentas.post("/compra", _ventasControllers.crearPago);
+rutaVentas.post("/ultima", _ventasControllers.cancelarUltimaVenta);
+rutaVentas.post("/reiniciar", _ventasControllers.reiniciarCarritoCompras);
 rutaVentas.post("/reembolso", _ventasControllers.crearReembolso);
 rutaVentas.get("/historial/:id", _ventasControllers.historialCompra);
 rutaVentas.get("/buscar", _ventasControllers.buscarProductoVendido);
 rutaVentas.get("/entregas/admin", _ventasControllers.verEntregasAdmin);
 rutaVentas.get("/entregas/:id", _ventasControllers.verEntregas);
 rutaVentas.post("/desactivar", _ventasControllers.desactivarEntrega);
-rutaVentas.post("/desactivar/carrito", _oauth.verificarToken, _ventasControllers.desactivarProductoCarrito);
+rutaVentas.post("/desactivar/carrito", _ventasControllers.desactivarProductoCarrito);
 rutaVentas.get("/productos", _ventasControllers.verReservasProductos);
-rutaVentas.post("/carrito/agregar/:producto", _oauth.verificarToken, _ventasControllers.agregarProductoCarrito);
+rutaVentas.post("/carrito/agregar/:producto", _ventasControllers.agregarProductoCarrito);
 rutaVentas.get("/carrito/:id", _ventasControllers.verCarroCompras);
 var _default = exports["default"] = rutaVentas;

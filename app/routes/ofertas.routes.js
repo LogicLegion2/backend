@@ -11,9 +11,9 @@ const rutaOfertas = Router();
 
 rutaOfertas.get("/", listarOferta);
 rutaOfertas.get("/buscar", buscarOferta);
-rutaOfertas.post("/crear", verificarToken, crearOferta);
+rutaOfertas.post("/crear", crearOferta);
 rutaOfertas.get("/obtener/:id", obtenerOferta);
-rutaOfertas.post("/editar",verificarToken, editarOferta);
-rutaOfertas.post("/desactivar",verificarToken, desactivarOferta);
+rutaOfertas.post("/editar", editarOferta);
+rutaOfertas.post("/desactivar", desactivarOferta);
 
 export default rutaOfertas;
