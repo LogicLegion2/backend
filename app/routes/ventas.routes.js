@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { agregarProductoCarrito, buscarProductoVendido, cancelarUltimaVenta, crearPago, crearReembolso, desactivarEntrega, desactivarProductoCarrito, historialCompra, reiniciarCarritoCompras, verCarroCompras, verEntregas, verEntregasAdmin, verReservasProductos } from "../controllers/ventas.controllers.js";
+import { agregarProductoCarrito, buscarProductoVendido, cancelarUltimaVenta, crearPago, crearReembolso, desactivarEntrega, desactivarProductoCarrito, historialCompra, reiniciarCarritoCompras, verCarroCompras, verEntregas, verEntregasAdmin, verificarStock, verReservasProductos } from "../controllers/ventas.controllers.js";
 import { verificarToken } from "../middlewares/oauth.js";
 
 /**
@@ -9,6 +9,7 @@ import { verificarToken } from "../middlewares/oauth.js";
 const rutaVentas = Router();
 
 rutaVentas.post("/compra", crearPago);
+rutaVentas.post("/stock", verificarStock);
 rutaVentas.post("/ultima", cancelarUltimaVenta);
 rutaVentas.post("/reiniciar", reiniciarCarritoCompras);
 rutaVentas.post("/reembolso", crearReembolso);

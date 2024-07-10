@@ -17,21 +17,45 @@ dayjs.locale('es'); // Establece el idioma a español
  * @param {object} req captura peticiones en HTML
  * @param {object} res envia peticiones en HTML
  */
+const verificarStock = async (req, res) => {
+    const { productos } = req.body;
+    try {
+        for (const producto of productos) {
+            const [stockResponse] = await pool.query(`CALL LL_VERIFICAR_STOCK('${producto.idProducto}')`);
+            const stockDisponible = stockResponse[0][0].cantidad;
+
+            if (stockDisponible < producto.cantidad) {
+                return res.status(400).json({ error: `No hay suficiente stock para el producto: ${producto.producto}` });
+            }
+        }
+        res.status(200).json({ message: 'Operación realizada con éxito' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al comparar stock' });
+    }
+};
+
+/**
+ * Esta funcion sirve para crear un pago
+ * @param {object} req captura peticiones en HTML
+ * @param {object} res envia peticiones en HTML
+ */
 const crearPago = async (req, res) => {
     const { id, productos, totalGlobal, metodoEntrega, direccion } = req.body;
-    console.log( id, productos, totalGlobal, metodoEntrega, direccion);
     try {
         const [ventaResponse] = await pool.query(`CALL LL_INSERTAR_VENTA('${id}', '${totalGlobal}', '${metodoEntrega}', '${direccion}');`);
         const [idResponse] = await pool.query(`CALL LL_ULTIMO_ID_VENTA();`);
         const idVenta = idResponse[0][0].idVenta;
+
         for (const producto of productos) {
             await pool.query(`CALL LL_INSERTAR_PRODUCTO_VENTA('${producto.idProducto}', '${idVenta}', '${producto.cantidad}');`);
         }
+
         res.status(200).json({ message: 'Compra realizada con éxito' });
     } catch (error) {
         res.status(500).json({ error: 'Error al registrar la compra' });
     }
 };
+
 
 /**
  * Esta funcion sirve para cancelar la última venta realizada
@@ -159,7 +183,6 @@ const verCarroCompras = async (req, res) => {
                 producto.img64 = null;
             }
         });
-        console.log(productos);
         res.status(200).json({ productos });
     } catch (error) {
         res.status(500).json(error);
@@ -173,6 +196,7 @@ const verCarroCompras = async (req, res) => {
  */
 const reiniciarCarritoCompras = async (req, res) => {
     const { id } = req.body;
+    console.log(id);
     try {
         const [response] = await pool.query(`CALL LL_REINICIAR_CARRITO('${id}');`);
 
@@ -285,7 +309,7 @@ const desactivarEntrega = async (req, res) => {
 const desactivarProductoCarrito = async (req, res) => {
     const idProducto = req.body.idProducto;
     const id = req.body.id;
-    console.log(idProducto,id);
+    console.log(idProducto, id);
     try {
         const respuesta = await pool.query(`CALL LL_DESACTIVAR_PRODUCTO_CARRITO('${idProducto}','${id}');`);
         res.json(respuesta);
@@ -311,4 +335,4 @@ const agregarProductoCarrito = async (req, res) => {
     }
 };
 
-export { agregarProductoCarrito, cancelarUltimaVenta, crearPago, crearReembolso, buscarProductoVendido, desactivarEntrega, desactivarProductoCarrito, historialCompra, reiniciarCarritoCompras, verCarroCompras, verEntregasAdmin, verEntregas, verReservasProductos }
+export { agregarProductoCarrito, cancelarUltimaVenta, crearPago, crearReembolso, buscarProductoVendido, desactivarEntrega, desactivarProductoCarrito, historialCompra, reiniciarCarritoCompras, verificarStock, verCarroCompras, verEntregasAdmin, verEntregas, verReservasProductos }
