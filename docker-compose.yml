@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  web:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      TOKEN_PRIVATEKEY: ${TOKEN_PRIVATEKEY}
+      TOKEN_EXPIRES_IN: ${TOKEN_EXPIRES_IN}
+      PAYPAL_API_SECRET: ${PAYPAL_API_SECRET}
+      PAYPAL_API_CLIENT: ${PAYPAL_API_CLIENT}
+      FRONTEND_URL: ${FRONTEND_URL}
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
+
+volumes:
+  db_data:
